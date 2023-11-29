@@ -1,7 +1,19 @@
-export default function Home() {
+import Banner from "@/components/customs/Banner";
+import MainLayout from "./(mainLayout)/layout";
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Trang chủ',
+  description: '...',
+}
+
+export default function HomePage() {
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      Next
-    </main>
+    <MainLayout >
+      <div className="flex  min-h-screen justify-around items-center w-full">
+        <span className="dark:text-red-500">hello</span>
+      </div>
+    </MainLayout>
   )
 }
