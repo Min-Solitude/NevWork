@@ -1,5 +1,7 @@
 'use client'
 
+import { useAppDispatch } from "@/hooks/useRedux"
+import { setBackgroundTheme } from "@/store/reducers"
 import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
@@ -15,8 +17,10 @@ export default function ButtonTheme() {
     return (
         <motion.button
             aria-label="Toggle Dark Mode"
-            onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-            className="w-[2.6rem] h-[2.6rem] text-xl overflow-hidden flex justify-center items-center outline-none border-cl-btn-light-bd-primary bg-cl-btn-light-bg-primary shadow-sm border dark:bg-cl-btn-dark-bg-primary dark:border-cl-btn-dark-bd-primary rounded-full "
+            onClick={() => {
+                setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+            }}
+            className=" text-xl flex justify-center items-center outline-none  "
             whileTap={{ scale: 0.9 }}
         >
             {resolvedTheme === 'dark' ?

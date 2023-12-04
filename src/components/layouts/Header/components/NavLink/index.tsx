@@ -5,13 +5,15 @@ import Button from '@/components/customs/Button'
 
 export default function NavLink() {
     return (
-        <nav className='flex gap-2 md:gap-4 items-center'>
+        <nav className='flex gap-2 duration-150 md:gap-6 items-center'>
             <Link href='/'>
-                <Button className='text-sm' kind='long'>
-                    <span className='text-cl-text-gray dark:text-white'>Trải nghiệm</span>
+                <Button className='text-base' kind='long'>
+                    <span>Trải nghiệm</span>
                 </Button>
             </Link>
-            <ButtonTheme />
+            <div className='flex justify-center items-center min-w-[2rem]'>
+                <ButtonTheme />
+            </div>
             <Account />
         </nav>
     )

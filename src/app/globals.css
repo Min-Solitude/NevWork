@@ -2,3 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
+@font-face {
+    font-family: 'San Francisco' ;
+    src: url(../assets/fonts/SanFranciscoDisplay-Bold.otf);
+    src: url(../assets/fonts/SanFranciscoDisplay-Light.otf);
+    src: url(../assets/fonts/SanFranciscoDisplay-Medium.otf);
+    src: url(../assets/fonts/SanFranciscoDisplay-Regular.otf);
+}
+  
+body {
+    font-family: 'San Francisco', sans-serif;
+}
+
+.font-dancing {
+    font-family: 'Dancing Script', cursive;
+}

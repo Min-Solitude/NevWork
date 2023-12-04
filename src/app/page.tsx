@@ -1,9 +1,8 @@
-import Banner from "@/components/customs/Banner";
+import type { Metadata } from 'next';
 import MainLayout from "./(mainLayout)/layout";
-import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Trang chủ',
+  title: 'Trang chủ | Sofi',
   description: '...',
 }
 
@@ -11,8 +10,8 @@ export default function HomePage() {
 
   return (
     <MainLayout >
-      <div className="flex  min-h-screen justify-around items-center w-full">
-        <span className="dark:text-red-500">hello</span>
+      <div className="flex  justify-around items-center w-full">
+        <div className="w-full">hello</div>
       </div>
     </MainLayout>
   )
