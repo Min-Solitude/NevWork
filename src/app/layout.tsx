@@ -2,6 +2,8 @@ import DarkModeProvider from '@/providers/DarkModeProvider'
 import './globals.css'
 import type { Metadata } from 'next'
 import { ReduxProviders } from '@/providers/ReduxProvider'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata: Metadata = {
   title: 'Sofi',
@@ -38,6 +40,22 @@ export default function RootLayout({
         <ReduxProviders>
           <DarkModeProvider>
             {children}
+            <ToastContainer
+              position="top-center"
+              autoClose={1000}
+              hideProgressBar
+              newestOnTop={false}
+              closeOnClick
+              closeButton={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+              icon={false}
+              bodyClassName="text-center text-base"
+              style={{ width: '20rem', backgroundColor: 'transparent' }}
+            />
           </DarkModeProvider>
         </ReduxProviders>
       </body>
