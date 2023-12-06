@@ -1,6 +1,5 @@
 'use client';
 
-import { useAppSelector } from '@/hooks/useRedux';
 
 type BackgroundThemeProps = {
     className?: string;
@@ -8,8 +7,6 @@ type BackgroundThemeProps = {
 };
 
 export default function BackgroundTheme({ className, Bgfor = 'main' }: BackgroundThemeProps) {
-
-    const theme = useAppSelector(state => state.mode.theme);
 
     if (Bgfor === 'auth')
         return (
@@ -22,7 +19,7 @@ export default function BackgroundTheme({ className, Bgfor = 'main' }: Backgroun
 
     return <div className='h-full'>
         <video className={`${className}`} autoPlay muted loop>
-            <source src={`videos/${theme}.mp4`} type="video/mp4" />
+            <source src={`videos/day.mp4`} type="video/mp4" />
         </video>
     </div>
 
