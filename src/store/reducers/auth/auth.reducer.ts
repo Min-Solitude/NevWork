@@ -1,14 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { deleteCookie } from 'cookies-next';
 import { AuthState, User } from './auth.type';
+import { signOut } from 'firebase/auth';
+import { auth } from '@/configs/firebase.config';
 
 const initialState: AuthState = {
-    account: {
-        displayName: '',
-        email: '',
-        phoneNumber: '',
-        photoURL: '',
-        uid: '',
-    },
+    account: null,
     loading: false,
 };
 
@@ -19,7 +16,13 @@ export const authSelector = createAsyncThunk('auth/authSelector', async (payload
 const reducer = createSlice({
     name: 'auth',
     initialState,
-    reducers: {},
+    reducers: {
+        logout: (state) => {
+            state.account = null;
+            deleteCookie('accessToken');
+            signOut(auth);
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(authSelector.pending, (state) => {
             state.loading = true;

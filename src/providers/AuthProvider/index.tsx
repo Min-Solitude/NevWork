@@ -10,6 +10,7 @@ export const AuthContext = createContext<{ user: firebase.User | null }>({
 });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+
     const [user, setUser] = useState<firebase.User | null>(null);
 
     useEffect(() => {

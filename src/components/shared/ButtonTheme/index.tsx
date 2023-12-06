@@ -22,7 +22,7 @@ export default function ButtonTheme() {
                 dispatch(setThemeVideo(resolvedTheme === 'dark' ? 'day' : 'night'))
                 setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
             }}
-            className=" flex justify-center items-center text-cl-yellow outline-none "
+            className=" flex justify-center items-center bg-bg-black-90 p-2 rounded-lg shadow-sd-primary overflow-hidden text-cl-yellow outline-none "
             whileTap={{ scale: 0.9 }}
         >
             {resolvedTheme === 'dark' ?

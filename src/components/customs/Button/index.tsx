@@ -15,7 +15,7 @@ export default function Button({ children, kind = 'default', className, type = '
 
     if (kind === 'square') return (
         <motion.button
-            className={`p-2 overflow-hidden  duration-150 flex justify-center items-center outline-none text-white bg-[#141414b6] border border-transparent dark:bg-cl-btn-light-bg-primary dark:border-cl-btn-light-bd-primary rounded-lg ${className}`}
+            className={`p-2 overflow-hidden  duration-150 flex justify-center items-center outline-none text-white bg-bg-black-90 border border-transparent dark:bg-cl-btn-light-bg-primary dark:border-cl-btn-light-bd-primary rounded-lg ${className}`}
             type={type}
             whileTap={{ scale: 0.95 }}
             onClick={onClick}
@@ -37,7 +37,7 @@ export default function Button({ children, kind = 'default', className, type = '
 
     if (kind === 'long') return (
         <motion.button
-            className={` text-white  px-4 duration-150 font-medium py-[0.3rem] overflow-hidden flex justify-center items-center outline-none  bg-[#141414b6] border border-transparent dark:bg-cl-btn-light-bg-primary dark:border-cl-btn-light-bd-primary rounded-full ${className}`}
+            className={` text-white  px-2 duration-150 font-medium py-1 overflow-hidden flex justify-center items-center outline-none  bg-[#141414b6] border border-transparent dark:bg-cl-btn-light-bg-primary dark:border-cl-btn-light-bd-primary rounded-lg ${className}`}
             whileTap={{ scale: 0.95 }}
             onClick={onClick}
             type={type}
@@ -58,7 +58,7 @@ export default function Button({ children, kind = 'default', className, type = '
     )
 
     return (
-        <motion.button className={`flex text-cl-text-gray dark:text-white justify-center items-center ${className}`}
+        <motion.button className={`flex duration-150  justify-center items-center ${className}`}
             type={type}
             onClick={onClick}
             whileTap={{ scale: 0.95 }}

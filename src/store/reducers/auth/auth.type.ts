@@ -1,5 +1,5 @@
 export type AuthState = {
-    account: User;
+    account: User | null;
     loading: boolean;
 };
 

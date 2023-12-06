@@ -1,7 +1,5 @@
 import ButtonTheme from '@/components/shared/ButtonTheme'
 import Account from '../Account'
-import Link from 'next/link'
-import Button from '@/components/customs/Button'
 
 export default function NavLink() {
     return (
