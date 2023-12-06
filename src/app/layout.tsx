@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { ReduxProviders } from '@/providers/ReduxProvider'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthProvider } from '@/providers/AuthProvider';
 
 export const metadata: Metadata = {
   title: 'Sofi',
@@ -37,27 +38,29 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`dark:bg-black text-[16px] overflow-hidden dark:text-white`}>
-        <ReduxProviders>
-          <DarkModeProvider>
-            {children}
-            <ToastContainer
-              position="top-center"
-              autoClose={1000}
-              hideProgressBar
-              newestOnTop={false}
-              closeOnClick
-              closeButton={false}
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-              icon={false}
-              bodyClassName="text-center text-base"
-              style={{ width: '20rem', backgroundColor: 'transparent' }}
-            />
-          </DarkModeProvider>
-        </ReduxProviders>
+        <AuthProvider>
+          <ReduxProviders>
+            <DarkModeProvider>
+              {children}
+              <ToastContainer
+                position="top-center"
+                autoClose={1000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                closeButton={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                icon={false}
+                bodyClassName="text-center text-base"
+                style={{ width: '20rem', backgroundColor: 'transparent' }}
+              />
+            </DarkModeProvider>
+          </ReduxProviders>
+        </AuthProvider>
       </body>
     </html >
   )

@@ -20,6 +20,24 @@ body {
     font-family: 'Dancing Script', cursive;
 }
 
+/* Custom scrollbar */
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f100; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.781);
+    border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
 
 /* toastify.css */
 

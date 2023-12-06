@@ -10,7 +10,7 @@ export default function HomePage() {
 
   return (
     <MainLayout >
-      <div className="flex  justify-around items-center w-full">
+      <div className="flex justify-center items-center w-full">
         <div className="w-full">hello</div>
       </div>
     </MainLayout>

@@ -1,18 +1,42 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { authApi, musicApi } from './services/api';
-import backgroundTheme from './reducers/backgroundTheme/backgroundTheme.reducer';
-import { setupListeners } from '@reduxjs/toolkit/query';
-export const store = configureStore({
-    reducer: {
-        backgroundTheme,
-        [musicApi.reducerPath]: musicApi.reducer,
-        [authApi.reducerPath]: authApi.reducer,
-    },
-    devTools: process.env.NODE_ENV !== 'production',
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({}).concat([musicApi.middleware, authApi.middleware]),
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import {
+    FLUSH,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    PersistConfig,
+    REGISTER,
+    REHYDRATE,
+    persistReducer,
+    persistStore,
+} from 'redux-persist';
+import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
+import storage from 'redux-persist/lib/storage';
+import { AuthReducer } from './reducers/auth/auth.reducer';
+
+const rootReducer = combineReducers({
+    auth: AuthReducer,
 });
 
-setupListeners(store.dispatch);
+type RootState = ReturnType<typeof rootReducer>;
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+const persistConfig: PersistConfig<RootState> = {
+    key: 'root',
+    storage,
+    stateReconciler: autoMergeLevel2,
+};
+
+const persistedReducer = persistReducer<RootState>(persistConfig, rootReducer);
+
+const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false,
+            ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        }),
+});
+
+export const persistor = persistStore(store);
+
+export default store;

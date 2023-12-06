@@ -1,7 +1,6 @@
 'use client'
 
-import { useAppDispatch } from "@/hooks/useRedux"
-import { setBackgroundTheme } from "@/store/reducers"
+import IonIcon from "@reacticons/ionicons"
 import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
@@ -20,7 +19,7 @@ export default function ButtonTheme() {
             onClick={() => {
                 setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
             }}
-            className=" text-xl flex justify-center items-center outline-none  "
+            className=" flex justify-center items-center text-cl-yellow outline-none "
             whileTap={{ scale: 0.9 }}
         >
             {resolvedTheme === 'dark' ?
@@ -28,13 +27,19 @@ export default function ButtonTheme() {
                     initial={{ rotate: 300, x: 20 }}
                     animate={{ rotate: 360, x: 0 }}
                     transition={{ duration: 1.5, type: 'spring', bounce: 0.5 }}
-                >🌙</motion.span>
+                    className="flex justify-center items-center"
+                >
+                    <IonIcon name='moon' className="text-2xl" />
+                </motion.span>
                 :
                 <motion.div
                     initial={{ rotate: 0, y: 40 }}
                     animate={{ rotate: 360, y: 0 }}
                     transition={{ duration: 1.5, type: 'spring', bounce: 0.5 }}
-                >☀️</motion.div>
+                    className="flex justify-center items-center"
+                >
+                    <IonIcon name='sunny' className="text-2xl" />
+                </motion.div>
             }
         </motion.button>
     )

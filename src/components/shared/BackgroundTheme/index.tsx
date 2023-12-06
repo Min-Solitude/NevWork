@@ -15,7 +15,7 @@ export default function BackgroundTheme({ className, Bgfor = 'main' }: Backgroun
 
     return (
         <video className={`${className}`} autoPlay muted loop>
-            <source src="/videos/night.mp4" type="video/mp4" />
+            <source src="/videos/day.mp4" type="video/mp4" />
         </video>
     )
 }
