@@ -1,7 +1,12 @@
 export type AuthState = {
-    accessToken: string;
     account: User;
     loading: boolean;
 };
 
-type User = {};
+export type User = {
+    displayName: string | null;
+    email: string | null;
+    phoneNumber: string | null;
+    photoURL: string | null;
+    uid: string;
+};
