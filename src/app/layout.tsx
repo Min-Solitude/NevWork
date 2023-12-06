@@ -36,8 +36,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={`dark:bg-black text-[16px] overflow-hidden dark:text-white`}>
+    <html lang="en" >
+      <body  suppressHydrationWarning={true} className={`dark:bg-black text-[16px] overflow-hidden dark:text-white`}>
         <AuthProvider>
           <ReduxProviders>
             <DarkModeProvider>
