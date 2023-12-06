@@ -1,22 +1,26 @@
 'use client'
 
 import IonIcon from "@reacticons/ionicons"
+import { useAppDispatch } from "@/hooks/useRedux"
+import { managerActionAction } from "@/store/managerAllMode/slice"
+// import { setBackgroundTheme } from "@/store/reducers"
 import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 
 export default function ButtonTheme() {
+    const Appdispath = useAppDispatch()
     const { resolvedTheme, setTheme } = useTheme()
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => setMounted(true), [])
-
     if (!mounted) return null
 
     return (
         <motion.button
             aria-label="Toggle Dark Mode"
             onClick={() => {
+                Appdispath(managerActionAction.openMode(resolvedTheme))
                 setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
             }}
             className=" flex justify-center items-center text-cl-yellow outline-none "
