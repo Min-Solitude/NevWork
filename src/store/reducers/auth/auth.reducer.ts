@@ -1,8 +1,8 @@
+import { auth } from '@/configs/firebase.config';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { deleteCookie } from 'cookies-next';
-import { AuthState, User } from './auth.type';
 import { signOut } from 'firebase/auth';
-import { auth } from '@/configs/firebase.config';
+import { AuthState, User } from './auth.type';
 
 const initialState: AuthState = {
     account: null,
@@ -10,6 +10,10 @@ const initialState: AuthState = {
 };
 
 export const authSelector = createAsyncThunk('auth/authSelector', async (payload: User) => {
+    return payload;
+});
+
+export const updateBanner = createAsyncThunk('auth/updateBanner', async (payload: string) => {
     return payload;
 });
 
@@ -24,11 +28,7 @@ const reducer = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(authSelector.pending, (state) => {
-            state.loading = true;
-        });
         builder.addCase(authSelector.fulfilled, (state, action) => {
-            state.loading = false;
             state.account = {
                 displayName: action.payload?.displayName,
                 email: action.payload?.email,
@@ -37,8 +37,11 @@ const reducer = createSlice({
                 uid: action.payload?.uid,
             };
         });
-        builder.addCase(authSelector.rejected, (state) => {
-            state.loading = false;
+
+        builder.addCase(updateBanner.fulfilled, (state, action) => {
+            if (state.account) {
+                state.account.banner = action.payload;
+            }
         });
     },
 });

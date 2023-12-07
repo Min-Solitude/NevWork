@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 import { setThemeVideo } from "@/store/reducers/mode/mode.reducer"
+import Button from "@/components/customs/Button"
 
 export default function ButtonTheme() {
     const dispatch = useAppDispatch()
@@ -16,14 +17,13 @@ export default function ButtonTheme() {
     if (!mounted) return null
 
     return (
-        <motion.button
-            aria-label="Toggle Dark Mode"
+        <Button
             onClick={() => {
                 dispatch(setThemeVideo(resolvedTheme === 'dark' ? 'day' : 'night'))
                 setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
             }}
-            className=" flex justify-center items-center bg-bg-black-90 p-2 rounded-lg shadow-sd-primary overflow-hidden text-cl-yellow outline-none "
-            whileTap={{ scale: 0.9 }}
+            className="overflow-hidden"
+            kind="square"
         >
             {resolvedTheme === 'dark' ?
                 <motion.span
@@ -32,7 +32,7 @@ export default function ButtonTheme() {
                     transition={{ duration: 1.5, type: 'spring', bounce: 0.5 }}
                     className="flex justify-center items-center"
                 >
-                    <IonIcon name='moon' className="text-2xl" />
+                    <IonIcon name='moon' className="text-2xl text-cl-yellow" />
                 </motion.span>
                 :
                 <motion.div
@@ -41,9 +41,9 @@ export default function ButtonTheme() {
                     transition={{ duration: 1.5, type: 'spring', bounce: 0.5 }}
                     className="flex justify-center items-center"
                 >
-                    <IonIcon name='sunny' className="text-2xl" />
+                    <IonIcon name='sunny' className="text-2xl text-cl-yellow" />
                 </motion.div>
             }
-        </motion.button>
+        </Button>
     )
 }

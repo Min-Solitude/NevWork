@@ -9,4 +9,5 @@ export type User = {
     phoneNumber: string | null;
     photoURL: string | null;
     uid: string;
+    banner?: string | null;
 };

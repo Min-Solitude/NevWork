@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ModeState } from './mode.type';
 
 const initialState: ModeState = {
-    theme: 'default',
+    theme: 'day',
 };
 
 export const setThemeVideo = createAsyncThunk('mode/setThemeVideo', async (theme: string) => {

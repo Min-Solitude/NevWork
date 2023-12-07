@@ -15,21 +15,25 @@ import { useEffect, useState } from 'react'
 export default function RegisterPage() {
     const dispatch = useAppDispatch()
     const [isLoading, setIsLoading] = useState(false)
-    const loading = useAppSelector(state => state.auth.loading)
 
     const router = useRouter()
 
     async function registerAccount(d: FormData) {
 
+        setIsLoading(true)
+
         if (!d.get('email') || !d.get('password')) {
+            setIsLoading(false)
             return toast.error(<Toast message='Vui lòng điền đầy đủ thông tin' type='error' />)
         }
 
         if (String(d.get('password')).length < 6) {
+            setIsLoading(false)
             return toast.error(<Toast message='Mật khẩu phải có ít nhất 6 ký tự' type='error' />)
         }
 
         if (d.get('password') !== d.get('re_password')) {
+            setIsLoading(false)
             return toast.error(<Toast message='Mật khẩu không khớp' type='error' />)
         }
 
@@ -44,19 +48,17 @@ export default function RegisterPage() {
                 phoneNumber: user.user?.phoneNumber,
             }
 
-            dispatch(authSelector(dataSave))
+            await dispatch(authSelector(dataSave))
+            setIsLoading(false)
             router.push('/')
 
         } catch (error: any) {
             console.log(error);
-            return toast.error(<Toast message={error?.response?.data?.message} type='error' />)
+            setIsLoading(false)
+            return toast.error(<Toast message={`Đăng ký thất bại`} type='error' />)
         }
 
     }
-
-    useEffect(() => {
-        setIsLoading(loading)
-    }, [loading])
 
     return (
         <div className='flex flex-col gap-8 items-center w-full'>

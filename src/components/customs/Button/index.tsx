@@ -15,7 +15,7 @@ export default function Button({ children, kind = 'default', className, type = '
 
     if (kind === 'square') return (
         <motion.button
-            className={`p-2 overflow-hidden  duration-150 flex justify-center items-center outline-none text-white bg-bg-black-90 border border-transparent dark:bg-cl-btn-light-bg-primary dark:border-cl-btn-light-bd-primary rounded-lg ${className}`}
+            className={`p-2 overflow-hidden  duration-150 flex justify-center items-center outline-none text-white bg-bg-black-90 rounded-lg ${className}`}
             type={type}
             whileTap={{ scale: 0.95 }}
             onClick={onClick}
@@ -26,7 +26,7 @@ export default function Button({ children, kind = 'default', className, type = '
 
     if (kind === 'form') return (
         <motion.button
-            className={` text-base text-black bg-cl-yellow-dark duration-150 py-2 rounded-lg font-bold tracking-wider hover:brightness-90 ${className}`}
+            className={` text-base text-black flex justify-center items-center bg-cl-yellow-dark duration-150 py-2 rounded-lg font-bold tracking-wider hover:brightness-90 ${className}`}
             whileTap={{ scale: 0.95 }}
             onClick={onClick}
             type={type}

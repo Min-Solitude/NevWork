@@ -2,6 +2,7 @@
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -24,5 +25,6 @@ provider.setCustomParameters({
     login_hint: 'nefy.website',
 });
 const storage = getStorage();
+const db = getFirestore(app);
 
-export { auth, provider, storage };
+export { auth, provider, storage, db };

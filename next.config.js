@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: false,
+    reactStrictMode: true,
+    unstable_runtimeJS: false,
+    unstable_generateStatic: true,
+    fallback: 'blocking',
+    images: {
+        domains: ['lh3.googleusercontent.com'],
+    },
     webpack(config) {
         config.module.rules.push({
             test: /\.(mp4|webm)$/,
@@ -18,13 +24,13 @@ const nextConfig = {
     },
     env: {
         PATH_URL_BACKEND: 'http://localhost:8080/api',
-        API_KEY: 'AIzaSyAW4418ULAUwbWGR44dMBU4TsBwT1OCk78',
-        AUTH_DOMAIN: 'sofi-e22d0.firebaseapp.com',
-        PROJECT_ID: 'sofi-e22d0',
-        STORAGE_BUCKET: 'sofi-e22d0.appspot.com',
-        MESSAGING_SENDER_ID: '399211119634',
-        APP_ID: '1:399211119634:web:88bfb3f506b2cefc9c44cb',
-        MEASUREMENT_ID: 'G-0VLQBC6SSD',
+        API_KEY: 'AIzaSyA1oTiZyU_5VVvHLiPpfJixqcMuQkWq7oY',
+        AUTH_DOMAIN: 'sofi-website-b4bb7.firebaseapp.com',
+        PROJECT_ID: 'sofi-website-b4bb7',
+        STORAGE_BUCKET: 'sofi-website-b4bb7.appspot.com',
+        MESSAGING_SENDER_ID: '69731134414',
+        APP_ID: '1:69731134414:web:acc7e42c9533bf03d4d99f',
+        MEASUREMENT_ID: 'G-3VYS9RCYJ2',
     },
 };
 
