@@ -11,7 +11,9 @@ export default function HomePage() {
   return (
     <MainLayout >
       <div className="flex justify-center items-center w-full">
-        <div className="w-full">hello</div>
+        <div className=" ">
+          home
+        </div>
       </div>
     </MainLayout>
   )

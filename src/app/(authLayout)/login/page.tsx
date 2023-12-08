@@ -21,7 +21,7 @@ export default function LoginPage() {
     const handleLogin = async (d: FormData) => {
         setLoading(true)
         try {
-            const user = await signInWithEmailAndPassword(auth, String(d.get('email')), String(d.get('password')))
+            const user = await signInWithEmailAndPassword(auth, `${String(d.get('email'))}@gmail.com`, String(d.get('password')))
 
             const dataSave: User = {
                 uid: user.user?.uid,

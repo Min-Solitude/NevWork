@@ -87,6 +87,12 @@ export default function Profile({ user, close }: ProfileProps) {
         router.push('/login')
     }
 
+    // FORMAT
+
+    function formatEmail(email: any) {
+        return email.replace(/\@.*/, '');
+    }
+
     return (
         <View className='fixed top-0 left-0 bottom-0 right-0 px-4 text-base bg-bg-black-90 flex justify-center items-center'
             initial={{ opacity: 0 }}
@@ -117,7 +123,7 @@ export default function Profile({ user, close }: ProfileProps) {
                         </div>
                     </div>
                     <div className=' flex-1 '>
-                        <div className='md:h-[20vh] xs:h-[15vh] duration-150 h-[10vh] mt-4 w-full relative'>
+                        <div className=' xs:h-[15vh] duration-150 h-[10vh] mt-4 w-full relative'>
                             <input type="file" accept="image/*" hidden name="bannerProfile" onChange={(e: any) => {
                                 if (e.target.files[0]) {
                                     setIsBannerUrl(e.target.files[0])
@@ -152,18 +158,18 @@ export default function Profile({ user, close }: ProfileProps) {
                                 </label>
                             </div>
                         </div>
-                        <form className='mt-16 flex flex-col gap-2' onSubmit={(e: any) => {
+                        <form className='mt-16 flex flex-col gap-4' onSubmit={(e: any) => {
                             if (isEdit) {
                                 handleUpdateProfile(e)
                             }
                         }}>
                             <div className='flex flex-col gap-1'>
-                                <label htmlFor="username" className='text-cl-yellow-dark font-semibold'>Tên tài khoản:</label>
-                                <Input kind='form' id='username' name='username' type="text" defaultValue={user?.displayName ? user?.displayName : 'Anonymous'} disabled={!isEdit} />
+                                <label htmlFor="email" className='text-cl-yellow-dark font-semibold'>Tài khoản:</label>
+                                <Input kind='form' type="text" id='email' name='email' defaultValue={user?.email ? formatEmail(user?.email) : 'Anonymous'} disabled />
                             </div>
                             <div className='flex flex-col gap-1'>
-                                <label htmlFor="email" className='text-cl-yellow-dark font-semibold'>Email:</label>
-                                <Input kind='form' type="text" id='email' name='email' defaultValue={user?.email ? user?.email : '---------'} disabled={!isEdit} />
+                                <label htmlFor="username" className='text-cl-yellow-dark font-semibold'>Tên người dùng:</label>
+                                <Input kind='form' id='username' name='username' type="text" defaultValue={user?.displayName ? user?.displayName : 'Anonymous'} disabled={!isEdit} />
                             </div>
                             <div className='flex flex-col gap-1'>
                                 <label htmlFor="phone" className='text-cl-yellow-dark font-semibold'>Số điện thoại:</label>

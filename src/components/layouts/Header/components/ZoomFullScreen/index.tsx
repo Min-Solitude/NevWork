@@ -16,7 +16,7 @@ export default function ZoomFullScreen() {
     }
 
     return (
-        <div className='flex justify-center items-center min-w-[2rem]'>
+        <div className='md:flex hidden justify-center items-center min-w-[2rem]'>
             <Button kind='square'>
                 <IonIcon name="expand-outline" className='text-2xl' onClick={handleFullScreen} />
             </Button>

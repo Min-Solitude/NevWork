@@ -46,6 +46,12 @@ body {
     @apply shadow-sd-primary top-8 bg-[#adadad46] border border-[#424242] !important;
 }
 
+/* range  */
+.slider::-moz-range-thumb {
+  background: #04AA6D;
+  cursor: pointer;
+}
+
 /* Loadning spinner  */
 
 .spinner {

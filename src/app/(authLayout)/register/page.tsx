@@ -38,7 +38,7 @@ export default function RegisterPage() {
         }
 
         try {
-            const user = await createUserWithEmailAndPassword(auth, String(d.get('email')), String(d.get('password')))
+            const user = await createUserWithEmailAndPassword(auth, `${String(d.get('email'))}@gmail.com`, String(d.get('password')))
 
             const dataSave: User = {
                 uid: user.user?.uid,

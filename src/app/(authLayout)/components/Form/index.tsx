@@ -100,8 +100,8 @@ export default function Form({ kind, submit }: FormProps) {
                 submit?.(new FormData(e.target as HTMLFormElement))
             }}>
                 <div className='flex flex-col w-full gap-1'>
-                    <Label htmlFor='email' className='text-[15px]'>Email</Label>
-                    <Input name='email' id='email' type='email' required kind='form' />
+                    <Label htmlFor='email' className='text-[15px]'>Tài khoản</Label>
+                    <Input name='email' id='email' type='text' required kind='form' />
                 </div>
                 <div className='flex flex-col w-full gap-1'>
                     <Label htmlFor='password' className='text-[15px]'>Mật khẩu</Label>

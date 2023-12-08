@@ -14,10 +14,12 @@ import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
 import storage from 'redux-persist/lib/storage';
 import { AuthReducer } from './reducers/auth/auth.reducer';
 import { ModeReducer } from './reducers/mode/mode.reducer';
+import { MusicReducer } from './reducers/music/music.reducer';
 
 const rootReducer = combineReducers({
     auth: AuthReducer,
     mode: ModeReducer,
+    music: MusicReducer,
 });
 
 type RootState = ReturnType<typeof rootReducer>;
