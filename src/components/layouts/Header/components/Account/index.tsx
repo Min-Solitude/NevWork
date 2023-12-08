@@ -16,7 +16,7 @@ export default function Account() {
 
     const user = useAppSelector(state => state.auth.account)
     const [isAccount, setIsAccount] = useState<User | null>(null)
-
+    
     useEffect(() => {
         if (user) {
             setIsAccount(user)

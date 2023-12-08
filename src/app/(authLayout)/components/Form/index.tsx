@@ -32,7 +32,8 @@ export default function Form({ kind, submit }: FormProps) {
         setLoading(true)
         try {
             const user = await signInWithPopup(auth, provider)
-
+            console.log(user);
+            
             const dataSave: User = {
                 uid: user.user?.uid,
                 email: user.user?.email,
