@@ -4,10 +4,10 @@ export type AuthState = {
 };
 
 export type User = {
-    displayName: string | null;
-    email: string | null;
-    phoneNumber: string | null;
-    photoURL: string | null;
-    uid: string;
+    displayName?: string | null;
+    email?: string | null;
+    phoneNumber?: string | null;
+    photoURL?: string | null;
+    uid?: string;
     banner?: string | null;
 };
