@@ -1,11 +1,15 @@
 'use client'
 
 import Button from "@/components/customs/Button"
+import { useAppSelector } from "@/hooks/useRedux"
 import View from "@/motions/View"
 import IonIcon from "@reacticons/ionicons"
 import React from "react"
 
 export default function Time() {
+
+
+    const isClock = useAppSelector(state => state.mode.isClock);
 
     const [time, setTime] = React.useState(new Date())
     const [isShowDetail, setIsShowDetail] = React.useState(false)
@@ -16,6 +20,8 @@ export default function Time() {
         }, 1000)
         return () => clearInterval(interval)
     }, [])
+
+    if (!isClock) return <div></div>;
 
     if (!time) return null
 

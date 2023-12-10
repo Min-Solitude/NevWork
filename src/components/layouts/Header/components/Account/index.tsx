@@ -34,7 +34,7 @@ export default function Account() {
                         onClick={() => setIsShowModal(!isShowModal)}
                     >
                         <div className='w-[36px] h-[36px] rounded-full overflow-hidden'>
-                            <Image src={isAccount?.photoURL ? isAccount?.photoURL : IMAGES.avatar} alt="avatar" width={36} height={36} className='rounded-full shadow-sd-primary' />
+                            <Image src={isAccount?.photoURL ? isAccount?.photoURL : 'https://i.pinimg.com/564x/16/3e/39/163e39beaa36d1f9a061b0f0c5669750.jpg'} alt="avatar" width={36} height={36} className='rounded-full shadow-sd-primary' />
                         </div>
                     </Button>
                 </>

@@ -1,11 +1,10 @@
 'use client'
 
 import Button from '@/components/customs/Button'
-import IonIcon from '@reacticons/ionicons'
-import React, { useEffect } from 'react'
-import View from '@/motions/View'
-import dynamic from 'next/dynamic'
 import CDMusic from '@/components/customs/CDMusic'
+import View from '@/motions/View'
+import IonIcon from '@reacticons/ionicons'
+import dynamic from 'next/dynamic'
 
 type NavigationProps = {
     className?: string
@@ -18,7 +17,7 @@ export default function Navigation({ className }: NavigationProps) {
 
     return (
         <div className={`absolute z-30 bottom-0 md:py-4 left-0 flex flex-col gap-4 w-full ${className}`}>
-            <div className='md:w-[90%] w-full flex justify-between m-auto px-4 md:px-0'>
+            <div className='md:w-[90%] w-full flex justify-between items-center m-auto px-4 md:px-0'>
                 <Time />
                 <CDMusic />
             </div>

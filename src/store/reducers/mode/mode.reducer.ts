@@ -3,10 +3,15 @@ import { ModeState } from './mode.type';
 
 const initialState: ModeState = {
     theme: 'day',
+    isClock: true,
 };
 
 export const setThemeVideo = createAsyncThunk('mode/setThemeVideo', async (theme: string) => {
     return theme;
+});
+
+export const setClock = createAsyncThunk('mode/setClock', async (payload: boolean) => {
+    return payload;
 });
 
 const reducer = createSlice({
@@ -16,6 +21,10 @@ const reducer = createSlice({
     extraReducers: (builder) => {
         builder.addCase(setThemeVideo.fulfilled, (state, action) => {
             state.theme = action.payload;
+        });
+
+        builder.addCase(setClock.fulfilled, (state, action) => {
+            state.isClock = action.payload;
         });
     },
 });
