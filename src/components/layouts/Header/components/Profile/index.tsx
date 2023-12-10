@@ -1,22 +1,14 @@
-import { IMAGES } from '@/assets';
 import Button from '@/components/customs/Button';
 import Close from '@/components/customs/Close';
 import Input from '@/components/customs/Input';
-import Toast from '@/components/customs/Toast';
 import Loading from '@/components/shared/Loading';
-import { auth, db, storage } from '@/configs/firebase.config';
-import { useAppDispatch } from '@/hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
 import View from '@/motions/View';
-import { AuthAction, authSelector, updateBanner } from '@/store/reducers/auth/auth.reducer';
-import { User } from '@/store/reducers/auth/auth.type';
+import { AuthAction, updateBanner, updateProfileUser } from '@/store/reducers/auth/auth.reducer';
 import IonIcon from '@reacticons/ionicons';
-import { getAuth, updateEmail, updatePhoneNumber, updateProfile } from 'firebase/auth';
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
-import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 
 type ProfileProps = {
     user: any;
@@ -24,98 +16,56 @@ type ProfileProps = {
 };
 
 export default function Profile({ user, close }: ProfileProps) {
-    console.log(user);
+
     const dispatch = useAppDispatch();
     const router = useRouter();
 
     const [isBannerUrl, setIsBannerUrl] = useState<any>(null);
     const [isAvatarUrl, setIsAvatarUrl] = useState<any>(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const isLoading = useAppSelector(state => state.auth.loading);
 
     const [isTab, setIsTab] = useState<'profile' | 'setting' | 'logout'>('profile');
     const [isEdit, setIsEdit] = useState(false);
 
     const handleUpdateBanner = async () => {
-        setIsLoading(true);
-        try {
-            const storageRef = ref(storage, `banners/${user.uid}/${isBannerUrl.name}`);
-            await uploadBytes(storageRef, isBannerUrl, {});
-            const downloadURL = await getDownloadURL(storageRef);
-
-            const userDocRef = doc(db, 'users', user.uid);
-            const docSnap = await getDoc(userDocRef);
-            if (docSnap.exists()) {
-                const { imageUrlBanner } = docSnap.data().image;
-                const deleteRef = ref(storage, imageUrlBanner);
-                try {
-                    await deleteObject(deleteRef);
-                    await updateDoc(userDocRef, {
-                        banner: downloadURL,
-                        uid: user.uid,
-                    });
-                } catch (error) {
-                    console.error('Error deleting old banner or updating document:', error);
-                }
-            } else {
-                try {
-                    await setDoc(userDocRef, {
-                        banner: downloadURL,
-                        uid: user.uid,
-                    });
-                } catch (error) {
-                    console.error('Error creating new document:', error);
-                }
-            }
-            await dispatch(updateBanner(downloadURL));
-            setIsLoading(false);
-        } catch (error) {
-            console.log(error);
-            setIsLoading(false);
-            return toast.error(<Toast message="Cập nhật thất bại" type="error" />);
+        const payload = {
+            isBannerUrl,
+            uid: user?.uid,
         }
+        dispatch(updateBanner(payload))
     };
-    console.log(auth.currentUser);
 
     const handleUpdateProfile = async (e: any) => {
         e.preventDefault();
-        const { username, phone } = e.target?.elements;
 
-        console.log(username?.value, phone?.value);
-        const user = auth.currentUser;
-        if (user) {
-            await updateProfile(user, {
-                displayName: username?.value,
-            });
-            await updateDoc(doc(db, 'users', user.uid), {
-                phoneNumber: phone.value,
-            });
-            await dispatch(authSelector({
-                uid: user.uid,
-                email: user.email,
-                displayName: user.displayName,
-                photoURL: user.photoURL,
-                phoneNumber: phone.value,
-            }));
+        const data = new FormData(e.target);
+
+        const updates = {} as any;
+
+        if (data.get('email')) {
+            updates.email = data.get('email');
         }
 
-
-        if (isEdit) {
-            console.log(isEdit);
+        if (data.get('username')) {
+            updates.displayName = data.get('username');
         }
+
+        if (data.get('phone')) {
+            updates.phoneNumber = data.get('phone');
+        }
+
+        await dispatch(updateProfileUser({ data: updates, uid: user?.uid, avatar: isAvatarUrl }))
+
+        setIsEdit(false);
     };
 
     const handleLogout = async () => {
-        setIsLoading(true);
         await dispatch(AuthAction.logout());
-        setIsLoading(false);
         router.push('/login');
     };
 
-    // FORMAT
+    console.log(user);
 
-    function formatEmail(email: any) {
-        return email.replace(/\@.*/, '');
-    }
 
     return (
         <View
@@ -195,9 +145,9 @@ export default function Profile({ user, close }: ProfileProps) {
                                 src={
                                     isBannerUrl
                                         ? URL.createObjectURL(isBannerUrl)
-                                        : user?.photoURL
-                                            ? user?.photoURL
-                                            : IMAGES.backgroundBanner
+                                        : user?.banner
+                                            ? user?.banner
+                                            : 'https://i.pinimg.com/564x/e7/0f/4b/e70f4b77b7195c4b6081bf1530e9c046.jpg'
                                 }
                                 alt="avatar"
                                 width={1440}
@@ -211,7 +161,7 @@ export default function Profile({ user, close }: ProfileProps) {
                                             ? URL.createObjectURL(isAvatarUrl)
                                             : user?.photoURL
                                                 ? user?.photoURL
-                                                : IMAGES.avatar
+                                                : 'https://i.pinimg.com/564x/16/3e/39/163e39beaa36d1f9a061b0f0c5669750.jpg'
                                     }
                                     alt="avatar"
                                     width={1440}
@@ -230,35 +180,42 @@ export default function Profile({ user, close }: ProfileProps) {
                                     }}
                                     id="avatarProfile"
                                 />
-                                <label
-                                    htmlFor="avatarProfile"
-                                    className="p-1 flex justify-center items-center rounded-full bg-white absolute bottom-0 right-0"
-                                >
-                                    <IonIcon name="pencil-outline" className="text-base text-black" />
-                                </label>
+                                {
+                                    isEdit && (
+                                        <label
+                                            htmlFor="avatarProfile"
+                                            className="p-1 flex justify-center items-center rounded-full bg-white absolute bottom-0 right-0"
+                                        >
+                                            <IonIcon name="pencil-outline" className="text-base text-black" />
+                                        </label>
+                                    )
+                                }
                             </div>
                         </div>
                         <form
                             className="mt-16 flex flex-col gap-2"
                             onSubmit={(e: any) => {
-                                if (isEdit) {
-                                    handleUpdateProfile(e);
-                                }
+                                handleUpdateProfile(e);
                             }}
                         >
-                            <div className="flex flex-col gap-1">
-                                <label htmlFor="email" className="text-cl-yellow-dark font-semibold">
-                                    Tài khoản::
-                                </label>
-                                <Input
-                                    kind="form"
-                                    type="text"
-                                    id="email"
-                                    name="email"
-                                    defaultValue={user?.email ? formatEmail(user?.email) : 'Anonymous'}
-                                    disabled={!isEdit}
-                                />
-                            </div>
+                            {
+                                user?.loginBy === 'account' && (
+                                    <div className="flex flex-col gap-1">
+                                        <label htmlFor="account" className="text-cl-yellow-dark font-semibold">
+                                            Tài khoản::
+                                        </label>
+                                        <Input
+                                            kind="form"
+                                            type="text"
+                                            id="account"
+                                            name="account"
+                                            defaultValue={user?.account ? user?.account : null}
+                                            placeholder='Chưa cập nhật'
+                                            disabled
+                                        />
+                                    </div>
+                                )
+                            }
                             <div className="flex flex-col gap-1">
                                 <label htmlFor="username" className="text-cl-yellow-dark font-semibold">
                                     Tên người dùng:
@@ -268,7 +225,8 @@ export default function Profile({ user, close }: ProfileProps) {
                                     id="username"
                                     name="username"
                                     type="text"
-                                    defaultValue={user?.displayName ? user?.displayName : 'Anonymous'}
+                                    defaultValue={user?.displayName ? user?.displayName : null}
+                                    placeholder='Chưa cập nhật'
                                     disabled={!isEdit}
                                 />
                             </div>
@@ -281,21 +239,51 @@ export default function Profile({ user, close }: ProfileProps) {
                                     type="text"
                                     id="phone"
                                     name="phone"
-                                    defaultValue={user?.phoneNumber ? user?.phoneNumber : '---------'}
+                                    defaultValue={user?.phoneNumber ? user?.phoneNumber : null}
+                                    placeholder='Chưa cập nhật'
+                                    disabled={!isEdit}
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1">
+                                <label htmlFor="email" className="text-cl-yellow-dark font-semibold">
+                                    Email:
+                                </label>
+                                <Input
+                                    kind="form"
+                                    type="text"
+                                    id="email"
+                                    name="email"
+                                    defaultValue={user?.email ? user?.email : null}
+                                    placeholder='Chưa cập nhật'
                                     disabled={!isEdit}
                                 />
                             </div>
                             <div className="w-full flex gap-4 mt-8">
-                                <Button
-                                    kind="form"
-                                    type={isEdit ? 'submit' : 'button'}
-                                    className="mt-4 flex-1"
-                                    onClick={() => {
-                                        setIsEdit(true);
-                                    }}
-                                >
-                                    {isEdit ? 'Lưu' : 'Chỉnh sửa'}
-                                </Button>
+                                {
+                                    !isEdit && (
+                                        <Button
+                                            kind="form"
+                                            type={'button'}
+                                            className="mt-4 flex-1"
+                                            onClick={() => {
+                                                setIsEdit(true);
+                                            }}
+                                        >
+                                            Chỉnh sửa
+                                        </Button>
+                                    )
+                                }
+                                {
+                                    isEdit && (
+                                        <Button
+                                            kind="form"
+                                            type={'submit'}
+                                            className="mt-4 flex-1"
+                                        >
+                                            Lưu
+                                        </Button>
+                                    )
+                                }
                                 {isEdit && (
                                     <Button
                                         kind="form"

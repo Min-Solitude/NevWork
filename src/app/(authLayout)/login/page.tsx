@@ -2,7 +2,7 @@
 
 import Toast from '@/components/customs/Toast'
 import Loading from '@/components/shared/Loading'
-import { auth } from '@/configs/firebase.config'
+import { auth, db } from '@/configs/firebase.config'
 import { useAppDispatch } from '@/hooks/useRedux'
 import { authSelector } from '@/store/reducers/auth/auth.reducer'
 import { User } from '@/store/reducers/auth/auth.type'
@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 import Form from '../components/Form'
 import { useState } from 'react'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 
 export default function LoginPage() {
 
@@ -23,23 +24,45 @@ export default function LoginPage() {
         try {
             const user = await signInWithEmailAndPassword(auth, `${String(d.get('email'))}@gmail.com`, String(d.get('password')))
 
-            const dataSave: User = {
-                uid: user.user?.uid,
-                email: user.user?.email,
-                displayName: user.user?.displayName,
-                photoURL: user.user?.photoURL,
-                phoneNumber: user.user?.phoneNumber,
+            const userDocRef = doc(db, 'users', user.user?.uid);
+            const docSnap = await getDoc(userDocRef);
+
+
+            if (docSnap.exists()) {
+                await dispatch(authSelector(docSnap.data()))
+                setLoading(false)
+                router.push('/')
+            } else {
+                await setDoc(userDocRef, {
+                    uid: user.user?.uid,
+                    displayName: user.user?.displayName,
+                    account: formatEmail(user.user?.email),
+                    photoURL: user.user?.photoURL,
+                    phoneNumber: user.user?.phoneNumber,
+                    role: 'user',
+                    loginBy: 'account'
+                });
+                setLoading(false)
+                await dispatch(authSelector({
+                    uid: user.user?.uid,
+                    account: formatEmail(user.user?.email),
+                    displayName: user.user?.displayName,
+                    photoURL: user.user?.photoURL,
+                    phoneNumber: user.user?.phoneNumber,
+                    role: 'user',
+                    loginBy: 'account'
+                }))
+                router.push('/')
             }
-
-            await dispatch(authSelector(dataSave))
-            setLoading(false)
-            router.push('/')
-
         } catch (error: any) {
             console.log(error);
             setLoading(false)
             return toast.error(<Toast message={`Đăng nhập thất bại`} type='error' />)
         }
+    }
+
+    function formatEmail(email: any) {
+        return email.replace(/\@.*/, '');
     }
 
     return (

@@ -5,13 +5,14 @@ import Input from '@/components/customs/Input'
 import Label from '@/components/customs/Label'
 import Toast from '@/components/customs/Toast'
 import Loading from '@/components/shared/Loading'
-import { auth, provider } from '@/configs/firebase.config'
+import { auth, db, provider } from '@/configs/firebase.config'
 import { useAppDispatch } from '@/hooks/useRedux'
 import View from '@/motions/View'
 import { authSelector } from '@/store/reducers/auth/auth.reducer'
 import { User } from '@/store/reducers/auth/auth.type'
 import IonIcon from '@reacticons/ionicons'
 import { signInWithPopup } from 'firebase/auth'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -32,25 +33,48 @@ export default function Form({ kind, submit }: FormProps) {
         setLoading(true)
         try {
             const user = await signInWithPopup(auth, provider)
-            console.log(user);
-            
-            const dataSave: User = {
-                uid: user.user?.uid,
-                email: user.user?.email,
-                displayName: user.user?.displayName,
-                photoURL: user.user?.photoURL,
-                phoneNumber: user.user?.phoneNumber,
-            }
 
-            await dispatch(authSelector(dataSave))
-            setLoading(false)
-            router.push('/')
+            const userDocRef = doc(db, 'users', user.user?.uid);
+            const docSnap = await getDoc(userDocRef);
+
+            if (docSnap.exists()) {
+                await dispatch(authSelector(docSnap.data()))
+                setLoading(false)
+                router.push('/')
+            } else {
+                await setDoc(userDocRef, {
+                    uid: user.user?.uid,
+                    displayName: user.user?.displayName,
+                    account: formatEmail(user.user?.email),
+                    email: user.user?.email,
+                    photoURL: user.user?.photoURL,
+                    phoneNumber: user.user?.phoneNumber,
+                    role: 'user',
+                    loginBy: 'google'
+                });
+                setLoading(false)
+                await dispatch(authSelector({
+                    uid: user.user?.uid,
+                    account: formatEmail(user.user?.email),
+                    displayName: user.user?.displayName,
+                    photoURL: user.user?.photoURL,
+                    email: user.user?.email,
+                    phoneNumber: user.user?.phoneNumber,
+                    role: 'user',
+                    loginBy: 'google'
+                }))
+                router.push('/')
+            }
 
         } catch (error) {
             console.log(error);
             setLoading(false)
             return toast.error(<Toast message={`Đăng nhập thất bại`} type='error' />)
         }
+    }
+
+    function formatEmail(email: any) {
+        return email.replace(/\@.*/, '');
     }
 
     return (

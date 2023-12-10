@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,
+    reactStrictMode: false,
     unstable_runtimeJS: false,
     unstable_generateStatic: true,
     fallback: 'blocking',
     images: {
-        domains: ['lh3.googleusercontent.com', 'i.pinimg.com'],
+        domains: ['lh3.googleusercontent.com', 'i.pinimg.com', 'firebasestorage.googleapis.com'],
     },
     webpack(config) {
         config.module.rules.push({

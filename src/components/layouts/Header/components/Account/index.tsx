@@ -16,7 +16,7 @@ export default function Account() {
 
     const user = useAppSelector(state => state.auth.account)
     const [isAccount, setIsAccount] = useState<User | null>(null)
-    
+
     useEffect(() => {
         if (user) {
             setIsAccount(user)
@@ -33,7 +33,9 @@ export default function Account() {
                     <Button
                         onClick={() => setIsShowModal(!isShowModal)}
                     >
-                        <Image src={isAccount?.photoURL ? isAccount?.photoURL : IMAGES.avatar} alt="avatar" width={36} height={36} className='rounded-full shadow-sd-primary' />
+                        <div className='w-[36px] h-[36px] rounded-full overflow-hidden'>
+                            <Image src={isAccount?.photoURL ? isAccount?.photoURL : IMAGES.avatar} alt="avatar" width={36} height={36} className='rounded-full shadow-sd-primary' />
+                        </div>
                     </Button>
                 </>
             ) : <Link href="/login" className='flex justify-center items-center'>

@@ -5,9 +5,12 @@ export type AuthState = {
 
 export type User = {
     displayName?: string | null;
+    account?: string | null;
     email?: string | null;
     phoneNumber?: string | null;
     photoURL?: string | null;
     uid?: string;
     banner?: string | null;
+    role?: string | null;
+    loginBy?: string | null;
 };

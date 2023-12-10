@@ -37,7 +37,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" >
-      <body  suppressHydrationWarning={true} className={`dark:bg-black text-[16px] overflow-hidden dark:text-white`}>
+      <body suppressHydrationWarning={true} className={`dark:bg-black text-[16px] overflow-hidden dark:text-white`}>
         <AuthProvider>
           <ReduxProviders>
             <DarkModeProvider>
@@ -56,7 +56,7 @@ export default function RootLayout({
                 theme="light"
                 icon={false}
                 bodyClassName="text-center text-base"
-                style={{ width: '20rem', backgroundColor: 'transparent' }}
+                style={{ width: '20rem', color: 'white', backgroundColor: 'transparent' }}
               />
             </DarkModeProvider>
           </ReduxProviders>
