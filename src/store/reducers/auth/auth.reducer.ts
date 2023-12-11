@@ -1,11 +1,12 @@
 import { auth, db, storage } from '@/configs/firebase.config';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { deleteCookie } from 'cookies-next';
-import { signOut } from 'firebase/auth';
-import { AuthState, User } from './auth.type';
-import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { signOut, updatePassword } from 'firebase/auth';
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { toast } from 'react-toastify';
+import { AuthState, User } from './auth.type';
+import { EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth/cordova';
 
 const initialState: AuthState = {
     account: null,
@@ -110,6 +111,25 @@ export const updateProfileUser = createAsyncThunk(
     },
 );
 
+export const handleAuthUpdatePassword = createAsyncThunk(
+    'auth/handleUpdatePassword',
+    async (payload: { newPassword: string; oldPassword: string }) => {
+        try {
+            const user = auth.currentUser;
+            if (user) {
+                const credential = EmailAuthProvider.credential(user.email as string, payload.oldPassword);
+                await reauthenticateWithCredential(user, credential);
+                await updatePassword(user, payload.newPassword);
+                return true;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
+        return false;
+    },
+);
+
 const reducer = createSlice({
     name: 'auth',
     initialState,
@@ -157,6 +177,22 @@ const reducer = createSlice({
             }
 
             toast.success('Cập nhật thông tin thành công');
+        });
+
+        builder.addCase(handleAuthUpdatePassword.rejected, (state) => {
+            state.loading = false;
+            toast.error('Cập nhật mật khẩu thất bại');
+        });
+        builder.addCase(handleAuthUpdatePassword.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(handleAuthUpdatePassword.fulfilled, (state, action) => {
+            state.loading = false;
+            if (action.payload) {
+                toast.success('Cập nhật mật khẩu thành công');
+            } else {
+                toast.error('Cập nhật mật khẩu thất bại');
+            }
         });
     },
 });
