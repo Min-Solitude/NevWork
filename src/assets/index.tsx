@@ -6,8 +6,14 @@ import backgroundBanner from './imgs/bannerDefault.jpg'
 import roomday from './imgs/roomday.jpg'
 import roomnight from './imgs/roomnight.jpg'
 
+import houseday from './imgs/houseday.jpg'
+import housenight from './imgs/housenight.jpg'
+
 import imageVideoRoomDay from './imgs/roomvideoday.png'
 import imageVideoRoomNight from './imgs/roomvideonight.png'
+
+import imageVideoHouseDay from './imgs/housevideoday.png'
+import imageVideoHouseNight from './imgs/housevideonight.png'
 
 export const IMAGES = {
     sofi,
@@ -17,6 +23,10 @@ export const IMAGES = {
     roomday,
     roomnight,
     imageVideoRoomDay,
-    imageVideoRoomNight
+    imageVideoRoomNight,
+    imageVideoHouseDay,
+    imageVideoHouseNight,
+    houseday,
+    housenight
 }
 

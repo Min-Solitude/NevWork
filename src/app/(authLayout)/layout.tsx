@@ -1,6 +1,8 @@
 import Logo from "@/components/customs/Logo"
-import BackgroundTheme from "@/components/shared/BackgroundTheme"
 import View from "@/motions/View"
+import dynamic from "next/dynamic"
+
+const BackgroundTheme = dynamic(() => import('@/components/shared/BackgroundTheme'), { ssr: false })
 
 export default function AuthLayout({
     children,

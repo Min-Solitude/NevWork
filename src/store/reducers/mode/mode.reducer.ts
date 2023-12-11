@@ -3,6 +3,7 @@ import { ModeState } from './mode.type';
 
 const initialState: ModeState = {
     theme: 'day',
+    nameScreen: 'room',
     isNotice: true,
     isClock: true,
     isShowPopupManagerImage: false,
@@ -30,6 +31,14 @@ const reducer = createSlice({
         },
         setKindScreen: (state, action) => {
             state.kindScreen = action.payload;
+        },
+        setNameScreen: (state, action) => {
+            state.nameScreen = action.payload.name;
+
+            if (action.payload.kind === 'video') {
+                // reload page
+                window.location.reload();
+            }
         },
     },
     extraReducers: (builder) => {

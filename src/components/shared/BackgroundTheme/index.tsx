@@ -12,13 +12,34 @@ type BackgroundThemeProps = {
 export default function BackgroundTheme({ className, Bgfor = 'main' }: BackgroundThemeProps) {
     const isMode = useAppSelector((state) => state.mode.theme);
     const isKindScreen = useAppSelector((state) => state.mode.kindScreen);
-    const isNameVideo = 'room'
+    const isNameVideo = useAppSelector((state) => state.mode.nameScreen);
 
-    if (!isKindScreen) return (
-        <div className='h-full duration-150 bg-white'>
-            <Image src={isMode === 'day' ? IMAGES.roomday : IMAGES.roomnight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
-        </div>
-    )
+    console.log(isNameVideo);
+
+
+    if (!isKindScreen) {
+        if (Bgfor === 'main') {
+            return (
+                <div className='h-full duration-150 bg-white'>
+                    {
+                        isNameVideo === 'room' ? (
+                            <Image src={isMode === 'day' ? IMAGES.roomday : IMAGES.roomnight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
+                        ) : isNameVideo === 'house' ? (
+                            <Image src={isMode === 'day' ? IMAGES.houseday : IMAGES.housenight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
+                        ) : null
+                    }
+                </div>
+            )
+        } else {
+            return (
+                <div className="h-full">
+                    <video className={`${className}`} autoPlay muted loop>
+                        <source src="/videos/auth.mp4" type="video/mp4" />
+                    </video>
+                </div>
+            )
+        }
+    }
 
 
     return <div className='h-full duration-150 bg-white'>
