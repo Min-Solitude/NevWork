@@ -5,6 +5,8 @@ const initialState: ModeState = {
     theme: 'day',
     isNotice: true,
     isClock: true,
+    isShowPopupManagerImage: false,
+    kindScreen: true,
 };
 
 export const setThemeVideo = createAsyncThunk('mode/setThemeVideo', async (theme: string) => {
@@ -22,7 +24,14 @@ export const setClock = createAsyncThunk('mode/setClock', async (payload: boolea
 const reducer = createSlice({
     name: 'mode',
     initialState,
-    reducers: {},
+    reducers: {
+        setShowPopupManagerImage: (state, action) => {
+            state.isShowPopupManagerImage = action.payload;
+        },
+        setKindScreen: (state, action) => {
+            state.kindScreen = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(setThemeVideo.fulfilled, (state, action) => {
             state.theme = action.payload;

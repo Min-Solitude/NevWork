@@ -1,24 +1,10 @@
 'use client'
 
-import { dataMusic } from '@/data/music.data'
-import { useAppSelector } from '@/hooks/useRedux'
+import { dataMusic } from '@/data/music.data';
 import View from '@/motions/View';
-import IonIcon from '@reacticons/ionicons';
 import Image from 'next/image';
-import React, { useEffect, useRef } from 'react'
 
 export default function CDMusic() {
-    const audioRef = useRef<HTMLAudioElement | null>(null);
-    const statusMusic = useAppSelector(state => state.music.status)
-    // const orderMusic = useAppSelector(state => state.music.order)
-
-    useEffect(() => {
-        if (statusMusic && audioRef.current) {
-            audioRef.current.play();
-        } else if (audioRef.current) {
-            audioRef.current.pause();
-        }
-    }, [statusMusic]);
 
     return (
         <div className='flex items-center gap-12'>
@@ -47,12 +33,6 @@ export default function CDMusic() {
                     </div>
                 </View>
             </div>
-            <audio
-                className='hidden'
-                src={dataMusic[0].url}
-                ref={audioRef}
-                autoPlay={statusMusic}
-            />
         </div>
     )
 }

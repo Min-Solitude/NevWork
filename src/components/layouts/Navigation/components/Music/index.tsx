@@ -15,7 +15,7 @@ export default function Music() {
 
     return (
         <div className='flex items-center gap-4'>
-            <div className='flex gap-4 items-center py-[0.3rem] px-4 rounded-full shadow-sd-primary bg-black dark:bg-transparent border border-transparent dark:border-cl-yellow'>
+            <div className='flex gap-4 items-center py-[0.3rem] px-4 rounded-full shadow-sd-primary backdrop-blur-2xl  border-white border dark:border-cl-yellow'>
                 <Button
                     onClick={() => dispatch(MusicAction.setPrevOrderMusic())}
                 >

@@ -12,6 +12,7 @@ type NavigationProps = {
 
 const Time = dynamic(() => import('./components/Time'), { ssr: false })
 const Music = dynamic(() => import('./components/Music'), { ssr: false })
+const Image = dynamic(() => import('./components/Image'), { ssr: false })
 
 export default function Navigation({ className }: NavigationProps) {
 
@@ -39,7 +40,8 @@ export default function Navigation({ className }: NavigationProps) {
                             <IonIcon name="logo-youtube" className='text-xl text-white dark:text-cl-yellow' />
                         </Button>
                     </div>
-                    <div className='flex gap-2 items-center absolute left-1/2 -translate-x-1/2'>
+                    <div className='flex gap-4 items-center absolute left-1/2 -translate-x-1/2'>
+                        <Image />
                         <Music />
                     </div>
                     <div className='flex gap-2 items-center'>
