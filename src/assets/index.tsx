@@ -15,6 +15,20 @@ import imageVideoRoomNight from './imgs/roomvideonight.png'
 import imageVideoHouseDay from './imgs/housevideoday.png'
 import imageVideoHouseNight from './imgs/housevideonight.png'
 
+// VIP
+
+import foxday from './imgs/vip/foxday.jpg'
+import foxnight from './imgs/vip/foxnight.jpg'
+
+import japanday from './imgs/vip/japanday.jpg'
+import japannight from './imgs/vip/japannight.jpg'
+
+import cacday from './imgs/vip/cacday.jpg'
+import cacnight from './imgs/vip/cacnight.jpg'
+
+import skyday from './imgs/vip/skyday.jpg'
+import skynight from './imgs/vip/skynight.jpg'
+
 export const IMAGES = {
     sofi,
     avatar,
@@ -27,6 +41,14 @@ export const IMAGES = {
     imageVideoHouseDay,
     imageVideoHouseNight,
     houseday,
-    housenight
+    housenight,
+    foxday,
+    foxnight,
+    japanday,
+    japannight,
+    cacday,
+    cacnight,
+    skyday,
+    skynight
 }
 

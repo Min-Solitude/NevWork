@@ -18,7 +18,7 @@ export default function Toast({ type, message }: { type: ToastType, message: str
                 })
             }
             {
-                type === 'error' && <div className='flex gap-2 text-white font-semibold items-center justify-center'>
+                type === 'error' && <div className='flex gap-2 b text-white font-semibold items-center justify-center'>
                     <p>{message}</p> <p className='text-lg'>&#128546;</p>
                 </div>
             }

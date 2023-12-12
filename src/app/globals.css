@@ -39,11 +39,16 @@ body {
     background: #555; 
 }
 
+/* Hidden scrollBar  */
+.hidden-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
 /* toastify.css */
 
 .Toastify__toast {
     border-radius: 16px; 
-    @apply shadow-sd-primary top-8 bg-[#adadad46] border border-[#424242] !important;
+    @apply shadow-sd-primary top-8 bg-[#ffffff46] border border-[#424242] !important;
 }
 
 /* range  */

@@ -5,7 +5,12 @@ const nextConfig = {
     unstable_generateStatic: true,
     fallback: 'blocking',
     images: {
-        domains: ['lh3.googleusercontent.com', 'i.pinimg.com', 'firebasestorage.googleapis.com'],
+        domains: [
+            'lh3.googleusercontent.com',
+            'i.pinimg.com',
+            'firebasestorage.googleapis.com',
+            'r4.wallpaperflare.com',
+        ],
     },
     webpack(config) {
         config.module.rules.push({

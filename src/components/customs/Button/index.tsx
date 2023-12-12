@@ -58,7 +58,7 @@ export default function Button({ children, kind = 'default', className, type = '
     )
 
     return (
-        <motion.button className={`flex duration-150  justify-center items-center ${className}`}
+        <motion.button className={`flex duration-150 outline-none justify-center items-center ${className}`}
             type={type}
             onClick={onClick}
             whileTap={{ scale: 0.95 }}

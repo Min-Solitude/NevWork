@@ -8,6 +8,7 @@ import Close from '../Close'
 import Toggle from '../Toggle'
 import { useState } from 'react'
 import BackgroundDefault from './BackgroundDefault'
+import BackgroundPremium from './BackgroundPremium'
 
 export default function ManagerBackground() {
 
@@ -20,8 +21,8 @@ export default function ManagerBackground() {
     }
 
     return (
-        <div className='top-0 left-0 bottom-0 right-0 z-50 flex justify-center items-center fixed'>
-            <View className='w-full md:max-w-[80vw] h-[80vh] text-base rounded-xl shadow-sd-primary relative backdrop-blur-[10rem]'
+        <div className='top-0 left-0 bottom-0 right-0 z-50 flex justify-center  items-center fixed'>
+            <View className='w-full md:w-[90%] xl:max-w-[80vw] overflow-hidden  lg:h-[80vh] text-base rounded-xl shadow-sd-primary relative backdrop-blur-[10rem]'
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.5 }}
@@ -43,8 +44,15 @@ export default function ManagerBackground() {
                         }} />
                     </div>
                     <div className='text-white flex flex-col gap-4'>
-                        <i className='underline'>Mặc định</i>
+                        <i className='underline'>Miễn phí</i>
                         <BackgroundDefault kindScreen={isSetKindScreen} />
+                    </div>
+                    <div className='text-white flex flex-col gap-4'>
+                        <div className='flex gap-2 items-center'>
+                            <i className='underline'>Nạp vip</i>
+                            <IonIcon name='diamond' className='text-lg' />
+                        </div>
+                        <BackgroundPremium kindScreen={isSetKindScreen} />
                     </div>
                 </div>
             </View>

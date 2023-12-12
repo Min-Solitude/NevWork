@@ -14,9 +14,6 @@ export default function BackgroundTheme({ className, Bgfor = 'main' }: Backgroun
     const isKindScreen = useAppSelector((state) => state.mode.kindScreen);
     const isNameVideo = useAppSelector((state) => state.mode.nameScreen);
 
-    console.log(isNameVideo);
-
-
     if (!isKindScreen) {
         if (Bgfor === 'main') {
             return (
@@ -26,7 +23,17 @@ export default function BackgroundTheme({ className, Bgfor = 'main' }: Backgroun
                             <Image src={isMode === 'day' ? IMAGES.roomday : IMAGES.roomnight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
                         ) : isNameVideo === 'house' ? (
                             <Image src={isMode === 'day' ? IMAGES.houseday : IMAGES.housenight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
-                        ) : null
+                        ) : isNameVideo === 'cac' ? (
+                            <Image src={isMode === 'day' ? IMAGES.cacday : IMAGES.cacnight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
+                        ) : isNameVideo === 'japan' ? (
+                            <Image src={isMode === 'day' ? IMAGES.japanday : IMAGES.japannight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
+                        ) : isNameVideo === 'sky' ? (
+                            <Image src={isMode === 'day' ? IMAGES.skyday : IMAGES.skynight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
+                        ) : isNameVideo === 'fox' ? (
+                            <Image src={isMode === 'day' ? IMAGES.foxday : IMAGES.foxnight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
+                        ) : (
+                            <Image src={isMode === 'day' ? IMAGES.roomday : IMAGES.roomnight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
+                        )
                     }
                 </div>
             )

@@ -50,7 +50,11 @@ export default function Form({ kind, submit }: FormProps) {
                     photoURL: user.user?.photoURL,
                     phoneNumber: user.user?.phoneNumber,
                     role: 'user',
-                    loginBy: 'google'
+                    loginBy: 'google',
+                    vip: {
+                        isVip: false,
+                        time: 0
+                    }
                 });
                 setLoading(false)
                 await dispatch(authSelector({
@@ -61,7 +65,11 @@ export default function Form({ kind, submit }: FormProps) {
                     email: user.user?.email,
                     phoneNumber: user.user?.phoneNumber,
                     role: 'user',
-                    loginBy: 'google'
+                    loginBy: 'google',
+                    vip: {
+                        isVip: false,
+                        time: 0
+                    }
                 }))
                 router.push('/')
             }

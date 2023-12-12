@@ -48,7 +48,11 @@ export default function RegisterPage() {
                 photoURL: user.user?.photoURL,
                 phoneNumber: user.user?.phoneNumber,
                 role: 'user',
-                loginBy: 'account'
+                loginBy: 'account',
+                vip: {
+                    isVip: false,
+                    time: 0
+                }
             }
 
             const userDocRef = doc(db, 'users', user.user?.uid);
@@ -60,7 +64,11 @@ export default function RegisterPage() {
                 photoURL: user.user?.photoURL,
                 phoneNumber: user.user?.phoneNumber,
                 role: 'user',
-                loginBy: 'account'
+                loginBy: 'account',
+                vip: {
+                    isVip: false,
+                    time: 0
+                }
             });
 
             await dispatch(authSelector(dataSave))

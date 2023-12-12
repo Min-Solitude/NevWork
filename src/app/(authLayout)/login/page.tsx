@@ -40,7 +40,11 @@ export default function LoginPage() {
                     photoURL: user.user?.photoURL,
                     phoneNumber: user.user?.phoneNumber,
                     role: 'user',
-                    loginBy: 'account'
+                    loginBy: 'account',
+                    vip: {
+                        isVip: false,
+                        time: 0
+                    }
                 });
                 setLoading(false)
                 await dispatch(authSelector({
@@ -50,7 +54,11 @@ export default function LoginPage() {
                     photoURL: user.user?.photoURL,
                     phoneNumber: user.user?.phoneNumber,
                     role: 'user',
-                    loginBy: 'account'
+                    loginBy: 'account',
+                    vip: {
+                        isVip: false,
+                        time: 0
+                    }
                 }))
                 router.push('/')
             }

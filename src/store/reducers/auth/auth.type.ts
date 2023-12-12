@@ -13,4 +13,8 @@ export type User = {
     banner?: string | null;
     role?: string | null;
     loginBy?: string | null;
+    vip?: {
+        isVip: boolean;
+        time: number;
+    };
 };
