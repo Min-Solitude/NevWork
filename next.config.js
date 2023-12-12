@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: false,
-    unstable_runtimeJS: false,
-    unstable_generateStatic: true,
-    fallback: 'blocking',
     images: {
         domains: [
             'lh3.googleusercontent.com',

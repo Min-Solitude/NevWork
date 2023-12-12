@@ -20,6 +20,10 @@ body {
     font-family: 'Dancing Script', cursive;
 }
 
+.sd-secondary{
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 10px, rgba(0, 0, 0, 0.25) 0px 4px 10px;
+}
+
 /* Custom scrollbar */
 
 ::-webkit-scrollbar {

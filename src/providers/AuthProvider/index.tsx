@@ -2,7 +2,6 @@
 
 import CheckScreen from "@/components/shared/CheckScreen";
 import { auth } from "@/configs/firebase.config";
-import { ThemeProvider } from "@material-tailwind/react";
 import { setCookie } from "cookies-next";
 import firebase from "firebase/compat/app";
 import { createContext, useEffect, useState } from "react";
@@ -47,8 +46,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     return <AuthContext.Provider value={{ user }}>
         <CheckScreen />
-        <ThemeProvider>
-            {children}
-        </ThemeProvider>
+        {children}
     </AuthContext.Provider>
 }
