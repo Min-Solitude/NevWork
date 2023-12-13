@@ -15,7 +15,8 @@ export type User = {
     loginBy?: string | null;
     vip?: {
         isVip: boolean;
-        time: number;
+        createdAt: Date | null;
+        expiredAt: Date | null;
         package: string | null;
     };
 };

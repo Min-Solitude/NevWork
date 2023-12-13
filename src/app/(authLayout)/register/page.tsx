@@ -51,8 +51,9 @@ export default function RegisterPage() {
                 loginBy: 'account',
                 vip: {
                     isVip: false,
-                    time: 0,
-                    package: null
+                    createdAt: null,
+                    expiredAt: null,
+                    package: null,
                 }
             }
 
@@ -68,8 +69,9 @@ export default function RegisterPage() {
                 loginBy: 'account',
                 vip: {
                     isVip: false,
-                    time: 0,
-                    package: null
+                    createdAt: null,
+                    expiredAt: null,
+                    package: null,
                 }
             });
 
