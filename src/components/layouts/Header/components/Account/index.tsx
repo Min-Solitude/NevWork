@@ -23,6 +23,7 @@ export default function Account() {
         }
     }, [user])
 
+
     return <div>
         {
             isAccount ? (
@@ -33,8 +34,15 @@ export default function Account() {
                     <Button
                         onClick={() => setIsShowModal(!isShowModal)}
                     >
-                        <div className='w-[36px] h-[36px] rounded-full overflow-hidden'>
+                        <div className='w-[36px] h-[36px] rounded-full relative'>
                             <Image src={isAccount?.photoURL ? isAccount?.photoURL : 'https://i.pinimg.com/564x/16/3e/39/163e39beaa36d1f9a061b0f0c5669750.jpg'} alt="avatar" width={36} height={36} className='rounded-full w-full h-full object-cover shadow-sd-primary' />
+                            {
+                                isAccount?.vip?.isVip && (
+                                    <div className='absolute -top-2 -right-2 bg-white flex justify-center items-center p-1 rounded-full'>
+                                        <IonIcon name="diamond" className='text-base text-blue-500' />
+                                    </div>
+                                )
+                            }
                         </div>
                     </Button>
                 </>

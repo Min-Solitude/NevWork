@@ -112,6 +112,13 @@ export default function ProfileInfomation({ user }: ProfileInfomationProps) {
                         height={1200}
                         className=" w-full rounded-full h-full object-cover"
                     />
+                    {
+                        user?.vip?.isVip && (
+                            <div className='absolute -top-0 -right-0 bg-white flex justify-center items-center p-1 rounded-full'>
+                                <IonIcon name="diamond" className='text-xl text-blue-500' />
+                            </div>
+                        )
+                    }
                     <input
                         type="file"
                         accept="image/*"
@@ -125,7 +132,7 @@ export default function ProfileInfomation({ user }: ProfileInfomationProps) {
                         id="avatarProfile"
                     />
                     {
-                        isEdit && (
+                        (isEdit && user?.vip?.isVip) && (
                             <label
                                 htmlFor="avatarProfile"
                                 className="p-1 flex justify-center items-center rounded-full bg-white absolute bottom-0 right-0"

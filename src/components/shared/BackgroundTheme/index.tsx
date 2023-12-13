@@ -77,6 +77,54 @@ export default function BackgroundTheme({ className, Bgfor = 'main' }: Backgroun
                             </>
                         )
                     }
+                    {
+                        isNameVideo === 'cac' && (
+                            <>
+                                <video key={isNameVideo} className={`${isMode === 'night' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                    <source src={`videos/cacday.mp4`} type="video/mp4" />
+                                </video>
+                                <video className={`${isMode === 'day' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                    <source src={`videos/cacnight.mp4`} type="video/mp4" />
+                                </video>
+                            </>
+                        )
+                    }
+                    {
+                        isNameVideo === 'fox' && (
+                            <>
+                                <video key={isNameVideo} className={`${isMode === 'night' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                    <source src={`videos/foxday.mp4`} type="video/mp4" />
+                                </video>
+                                <video className={`${isMode === 'day' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                    <source src={`videos/foxnight.mp4`} type="video/mp4" />
+                                </video>
+                            </>
+                        )
+                    }
+                    {
+                        isNameVideo === 'japan' && (
+                            <>
+                                <video key={isNameVideo} className={`${isMode === 'night' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                    <source src={`videos/japanday.mp4`} type="video/mp4" />
+                                </video>
+                                <video className={`${isMode === 'day' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                    <source src={`videos/japannight.mp4`} type="video/mp4" />
+                                </video>
+                            </>
+                        )
+                    }
+                    {
+                        isNameVideo === 'sky' && (
+                            <>
+                                <video key={isNameVideo} className={`${isMode === 'night' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                    <source src={`videos/skyday.mp4`} type="video/mp4" />
+                                </video>
+                                <video className={`${isMode === 'day' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                    <source src={`videos/skynight.mp4`} type="video/mp4" />
+                                </video>
+                            </>
+                        )
+                    }
                 </>
             ) : (
                 <div className="h-full">
