@@ -16,5 +16,6 @@ export type User = {
     vip?: {
         isVip: boolean;
         time: number;
+        package: string | null;
     };
 };

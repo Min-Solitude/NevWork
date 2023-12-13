@@ -53,7 +53,8 @@ export default function Form({ kind, submit }: FormProps) {
                     loginBy: 'google',
                     vip: {
                         isVip: false,
-                        time: 0
+                        time: 0,
+                        package: null
                     }
                 });
                 setLoading(false)
@@ -68,7 +69,8 @@ export default function Form({ kind, submit }: FormProps) {
                     loginBy: 'google',
                     vip: {
                         isVip: false,
-                        time: 0
+                        time: 0,
+                        package: null
                     }
                 }))
                 router.push('/')

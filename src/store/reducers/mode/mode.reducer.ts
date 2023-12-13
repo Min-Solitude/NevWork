@@ -37,7 +37,7 @@ const reducer = createSlice({
 
             if (action.payload.kind === 'video') {
                 // reload page
-                window.location.reload();
+                // window.location.reload();
             }
         },
     },

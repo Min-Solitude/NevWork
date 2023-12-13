@@ -43,7 +43,8 @@ export default function LoginPage() {
                     loginBy: 'account',
                     vip: {
                         isVip: false,
-                        time: 0
+                        time: 0,
+                        package: null
                     }
                 });
                 setLoading(false)
@@ -57,7 +58,8 @@ export default function LoginPage() {
                     loginBy: 'account',
                     vip: {
                         isVip: false,
-                        time: 0
+                        time: 0,
+                        package: null
                     }
                 }))
                 router.push('/')

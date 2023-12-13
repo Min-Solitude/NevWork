@@ -53,12 +53,30 @@ export default function BackgroundTheme({ className, Bgfor = 'main' }: Backgroun
         {
             Bgfor === 'main' ? (
                 <>
-                    <video className={`${isMode === 'night' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
-                        <source src={`videos/${isNameVideo}day.mp4`} type="video/mp4" />
-                    </video>
-                    <video className={`${isMode === 'day' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
-                        <source src={`videos/${isNameVideo}night.mp4`} type="video/mp4" />
-                    </video>
+                    {
+                        isNameVideo === 'room' && (
+                            <>
+                                <video key={isNameVideo} className={`${isMode === 'night' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                    <source src={`videos/roomday.mp4`} type="video/mp4" />
+                                </video>
+                                <video className={`${isMode === 'day' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                    <source src={`videos/roomnight.mp4`} type="video/mp4" />
+                                </video>
+                            </>
+                        )
+                    }
+                    {
+                        isNameVideo === 'house' && (
+                            <>
+                                <video key={isNameVideo} className={`${isMode === 'night' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                    <source src={`videos/houseday.mp4`} type="video/mp4" />
+                                </video>
+                                <video className={`${isMode === 'day' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                    <source src={`videos/housenight.mp4`} type="video/mp4" />
+                                </video>
+                            </>
+                        )
+                    }
                 </>
             ) : (
                 <div className="h-full">
