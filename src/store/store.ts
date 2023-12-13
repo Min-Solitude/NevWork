@@ -15,11 +15,13 @@ import storage from 'redux-persist/lib/storage';
 import { AuthReducer } from './reducers/auth/auth.reducer';
 import { ModeReducer } from './reducers/mode/mode.reducer';
 import { MusicReducer } from './reducers/music/music.reducer';
+import { NoticeReducer } from './reducers/notice/notice.reducer';
 
 const rootReducer = combineReducers({
     auth: AuthReducer,
     mode: ModeReducer,
     music: MusicReducer,
+    notice: NoticeReducer,
 });
 
 type RootState = ReturnType<typeof rootReducer>;

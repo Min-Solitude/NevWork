@@ -1,9 +1,7 @@
-"use client"
 import ButtonTheme from '@/components/shared/ButtonTheme'
 import Account from '../Account'
 import ZoomFullScreen from '../ZoomFullScreen'
 import Notice from '../Notice'
-
 
 export default function NavLink() {
 
