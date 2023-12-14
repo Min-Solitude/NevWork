@@ -14,6 +14,8 @@ export default function BackgroundTheme({ className, Bgfor = 'main' }: Backgroun
     const isKindScreen = useAppSelector((state) => state.mode.kindScreen);
     const isNameVideo = useAppSelector((state) => state.mode.nameScreen);
 
+    const account = useAppSelector((state) => state.auth.account);
+
     if (!isKindScreen) {
         if (Bgfor === 'main') {
             return (
@@ -23,14 +25,18 @@ export default function BackgroundTheme({ className, Bgfor = 'main' }: Backgroun
                             <Image src={isMode === 'day' ? IMAGES.roomday : IMAGES.roomnight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
                         ) : isNameVideo === 'house' ? (
                             <Image src={isMode === 'day' ? IMAGES.houseday : IMAGES.housenight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
-                        ) : isNameVideo === 'cac' ? (
-                            <Image src={isMode === 'day' ? IMAGES.cacday : IMAGES.cacnight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
-                        ) : isNameVideo === 'japan' ? (
-                            <Image src={isMode === 'day' ? IMAGES.japanday : IMAGES.japannight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
-                        ) : isNameVideo === 'sky' ? (
-                            <Image src={isMode === 'day' ? IMAGES.skyday : IMAGES.skynight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
-                        ) : isNameVideo === 'fox' ? (
-                            <Image src={isMode === 'day' ? IMAGES.foxday : IMAGES.foxnight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
+                        ) : account?.vip?.isVip ? (
+                            isNameVideo === 'cac' ? (
+                                <Image src={isMode === 'day' ? IMAGES.cacday : IMAGES.cacnight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
+                            ) : isNameVideo === 'japan' ? (
+                                <Image src={isMode === 'day' ? IMAGES.japanday : IMAGES.japannight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
+                            ) : isNameVideo === 'sky' ? (
+                                <Image src={isMode === 'day' ? IMAGES.skyday : IMAGES.skynight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
+                            ) : isNameVideo === 'fox' ? (
+                                <Image src={isMode === 'day' ? IMAGES.foxday : IMAGES.foxnight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
+                            ) : (
+                                <Image src={isMode === 'day' ? IMAGES.roomday : IMAGES.roomnight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
+                            )
                         ) : (
                             <Image src={isMode === 'day' ? IMAGES.roomday : IMAGES.roomnight} width={1980} height={1440} className='w-full h-full object-cover' alt='sofi' />
                         )
@@ -78,49 +84,64 @@ export default function BackgroundTheme({ className, Bgfor = 'main' }: Backgroun
                         )
                     }
                     {
-                        isNameVideo === 'cac' && (
+                        account?.vip?.isVip ? (
                             <>
-                                <video key={isNameVideo} className={`${isMode === 'night' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
-                                    <source src={`videos/cacday.mp4`} type="video/mp4" />
-                                </video>
-                                <video className={`${isMode === 'day' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
-                                    <source src={`videos/cacnight.mp4`} type="video/mp4" />
-                                </video>
+                                {
+                                    isNameVideo === 'cac' && (
+                                        <>
+                                            <video key={isNameVideo} className={`${isMode === 'night' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                                <source src={`videos/cacday.mp4`} type="video/mp4" />
+                                            </video>
+                                            <video className={`${isMode === 'day' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                                <source src={`videos/cacnight.mp4`} type="video/mp4" />
+                                            </video>
+                                        </>
+                                    )
+                                }
+                                {
+                                    isNameVideo === 'fox' && (
+                                        <>
+                                            <video key={isNameVideo} className={`${isMode === 'night' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                                <source src={`videos/foxday.mp4`} type="video/mp4" />
+                                            </video>
+                                            <video className={`${isMode === 'day' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                                <source src={`videos/foxnight.mp4`} type="video/mp4" />
+                                            </video>
+                                        </>
+                                    )
+                                }
+                                {
+                                    isNameVideo === 'japan' && (
+                                        <>
+                                            <video key={isNameVideo} className={`${isMode === 'night' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                                <source src={`videos/japanday.mp4`} type="video/mp4" />
+                                            </video>
+                                            <video className={`${isMode === 'day' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                                <source src={`videos/japannight.mp4`} type="video/mp4" />
+                                            </video>
+                                        </>
+                                    )
+                                }
+                                {
+                                    isNameVideo === 'sky' && (
+                                        <>
+                                            <video key={isNameVideo} className={`${isMode === 'night' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                                <source src={`videos/skyday.mp4`} type="video/mp4" />
+                                            </video>
+                                            <video className={`${isMode === 'day' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
+                                                <source src={`videos/skynight.mp4`} type="video/mp4" />
+                                            </video>
+                                        </>
+                                    )
+                                }
                             </>
-                        )
-                    }
-                    {
-                        isNameVideo === 'fox' && (
+                        ) : (
                             <>
                                 <video key={isNameVideo} className={`${isMode === 'night' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
-                                    <source src={`videos/foxday.mp4`} type="video/mp4" />
+                                    <source src={`videos/roomday.mp4`} type="video/mp4" />
                                 </video>
                                 <video className={`${isMode === 'day' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
-                                    <source src={`videos/foxnight.mp4`} type="video/mp4" />
-                                </video>
-                            </>
-                        )
-                    }
-                    {
-                        isNameVideo === 'japan' && (
-                            <>
-                                <video key={isNameVideo} className={`${isMode === 'night' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
-                                    <source src={`videos/japanday.mp4`} type="video/mp4" />
-                                </video>
-                                <video className={`${isMode === 'day' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
-                                    <source src={`videos/japannight.mp4`} type="video/mp4" />
-                                </video>
-                            </>
-                        )
-                    }
-                    {
-                        isNameVideo === 'sky' && (
-                            <>
-                                <video key={isNameVideo} className={`${isMode === 'night' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
-                                    <source src={`videos/skyday.mp4`} type="video/mp4" />
-                                </video>
-                                <video className={`${isMode === 'day' && 'hidden'} duration-150 ${className}`} autoPlay muted loop>
-                                    <source src={`videos/skynight.mp4`} type="video/mp4" />
+                                    <source src={`videos/roomnight.mp4`} type="video/mp4" />
                                 </video>
                             </>
                         )

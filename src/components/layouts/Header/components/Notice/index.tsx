@@ -20,6 +20,8 @@ export default function Notice() {
     const [isStatus, setIsStatus] = React.useState('all')
     const [isShowDetail, setIsShowDetail] = React.useState<Notice | null>(null)
 
+    const [isHaveUnread, setIsHaveUnread] = React.useState(false)
+
     const dispatch = useAppDispatch()
 
     const handleGetNotifications = (uid: string) => {
@@ -50,15 +52,52 @@ export default function Notice() {
         }
     }
 
+    const handleCheckUnread = (list: Notice[]) => {
+        const check = list.find(item => item.status === 'unread')
+        if (check) {
+            setIsHaveUnread(true)
+        } else {
+            setIsHaveUnread(false)
+        }
+    }
+
+    useEffect(() => {
+        if (notice) {
+            handleCheckUnread(notice)
+        }
+    }, [notice])
+
     return (
-        <div className='md:flex hidden justify-center relative items-center min-w-[2rem]'>
+        <div className='flex justify-center relative items-center min-w-[2rem]'>
             {
                 isShowDetail && <SeeNotice notice={isShowDetail} close={() => setIsShowDetail(null)} />
             }
             <Button kind='square'
                 onClick={() => setShow(!show)}
+                className='relative'
             >
-                <IonIcon name="notifications" className='text-2xl' />
+                {
+                    isHaveUnread ? (
+                        <View className='flex justify-center items-center'
+                            // The effect is always to swing like a bell
+                            initial={{ rotate: 20 }}
+                            animate={{ rotate: -20 }}
+                            transition={{
+                                repeat: Infinity,
+                                duration: 0.25,
+                                repeatType: 'reverse'
+                            }}
+
+                        >
+                            <IonIcon name="notifications" className='text-2xl text-cl-yellow' />
+                        </View>
+                    ) : (
+                        <View className='flex justify-center items-center'>
+                            <IonIcon name="notifications" className='text-2xl' />
+                        </View>
+                    )
+                }
+
             </Button>
             {
                 show && (
@@ -115,6 +154,6 @@ export default function Notice() {
                     </View>
                 )
             }
-        </div>
+        </div >
     )
 }

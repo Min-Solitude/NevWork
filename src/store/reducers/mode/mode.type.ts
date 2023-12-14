@@ -5,4 +5,5 @@ export type ModeState = {
     isClock: boolean;
     isShowPopupManagerImage: boolean;
     kindScreen: boolean;
+    isGreetings: boolean;
 };

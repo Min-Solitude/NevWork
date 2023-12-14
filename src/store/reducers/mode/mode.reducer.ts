@@ -8,6 +8,7 @@ const initialState: ModeState = {
     isClock: true,
     isShowPopupManagerImage: false,
     kindScreen: true,
+    isGreetings: true,
 };
 
 export const setThemeVideo = createAsyncThunk('mode/setThemeVideo', async (theme: string) => {
@@ -34,11 +35,9 @@ const reducer = createSlice({
         },
         setNameScreen: (state, action) => {
             state.nameScreen = action.payload.name;
-
-            if (action.payload.kind === 'video') {
-                // reload page
-                // window.location.reload();
-            }
+        },
+        setGreetings: (state, action) => {
+            state.isGreetings = action.payload;
         },
     },
     extraReducers: (builder) => {
