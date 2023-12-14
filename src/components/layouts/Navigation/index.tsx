@@ -1,9 +1,7 @@
 'use client'
 
-import Button from '@/components/customs/Button'
 import CDMusic from '@/components/customs/CDMusic'
 import View from '@/motions/View'
-import IonIcon from '@reacticons/ionicons'
 import dynamic from 'next/dynamic'
 
 type NavigationProps = {
@@ -13,6 +11,7 @@ type NavigationProps = {
 const Time = dynamic(() => import('./components/Time'), { ssr: false })
 const Music = dynamic(() => import('./components/Music'), { ssr: false })
 const Image = dynamic(() => import('./components/Image'), { ssr: false })
+const Tab = dynamic(() => import('./components/Tab'), { ssr: false })
 
 export default function Navigation({ className }: NavigationProps) {
 
@@ -29,17 +28,7 @@ export default function Navigation({ className }: NavigationProps) {
                     exit={{ opacity: 0, x: 10 }}
                     transition={{ duration: 0.2, type: 'tween', delay: 0.2 }}
                 >
-                    <div className='flex gap-2 items-center'>
-                        <Button className='bg-transparent hover:bg-cl-yellow-dark dark:hover:bg-transparent border border-transparent dark:hover:border-cl-yellow' kind='square'>
-                            <IonIcon name="home" className='text-xl text-white dark:text-cl-yellow' />
-                        </Button>
-                        <Button className='bg-transparent hover:bg-cl-yellow-dark dark:hover:bg-transparent border border-transparent dark:hover:border-cl-yellow' kind='square'>
-                            <IonIcon name="calendar" className='text-xl text-white dark:text-cl-yellow' />
-                        </Button>
-                        <Button className='bg-transparent hover:bg-cl-yellow-dark dark:hover:bg-transparent border border-transparent dark:hover:border-cl-yellow' kind='square'>
-                            <IonIcon name="logo-youtube" className='text-xl text-white dark:text-cl-yellow' />
-                        </Button>
-                    </div>
+                    <Tab />
                     <div className='flex gap-4 items-center absolute left-1/2 -translate-x-1/2'>
                         <Image />
                         <Music />

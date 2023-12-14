@@ -6,4 +6,13 @@ export type ModeState = {
     isShowPopupManagerImage: boolean;
     kindScreen: boolean;
     isGreetings: boolean;
+    greetings: Greetings | null;
+    isTabYoutube: boolean;
+    isNote: boolean;
+};
+
+export type Greetings = {
+    content: string;
+    status: boolean;
+    title: string;
 };
