@@ -44,7 +44,7 @@ export default function Greeting() {
                                 <Image src={'https://i.pinimg.com/564x/68/87/23/688723a19a837a3dd3f63ad8577c5171.jpg'} className='w-full h-full object-cover' alt='' width={500} height={500} />
                             </div>
                         </h1>
-                        <i className='text-white text-base'>"{greeting?.content}"</i>
+                        <i className='text-white text-base'>`&quot;`{greeting?.content}`&quot;`</i>
                     </div>
                 ) : null
             }
