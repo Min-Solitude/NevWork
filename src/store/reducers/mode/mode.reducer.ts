@@ -14,6 +14,7 @@ const initialState: ModeState = {
     greetings: null,
     isTabYoutube: false,
     isNote: false,
+    isLink: false,
 };
 
 export const setThemeVideo = createAsyncThunk('mode/setThemeVideo', async (theme: string) => {
@@ -62,6 +63,12 @@ const reducer = createSlice({
         },
         setNote: (state, action) => {
             state.isNote = action.payload;
+        },
+        setTab: (state, action) => {
+            console.log(action.payload);
+        },
+        setLink: (state, action) => {
+            state.isLink = action.payload;
         },
     },
     extraReducers: (builder) => {

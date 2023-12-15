@@ -5,7 +5,8 @@ import View from "@/motions/View"
 import Button from "../Button"
 import IonIcon from "@reacticons/ionicons"
 import { ModeAction } from "@/store/reducers/mode/mode.reducer"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useDebounce } from "@/hooks/useDebounce"
 
 const dataTab = [
     {
@@ -36,7 +37,35 @@ const dataTab = [
     }
 ]
 
+const defaultData = [
+    {
+        value: 1,
+        content: ""
+    },
+    {
+        value: 2,
+        content: ""
+    },
+    {
+        value: 3,
+        content: ""
+    },
+    {
+        value: 4,
+        content: ""
+    },
+    {
+        value: 5,
+        content: ""
+    }
+];
+
+
 export default function Note() {
+
+    const data = JSON.parse(
+        localStorage.getItem("note") ?? '[]'
+    );
 
     const isNote = useAppSelector(state => state.mode.isNote)
     const dispatch = useAppDispatch()
@@ -45,13 +74,39 @@ export default function Note() {
 
     const [isChooseTab, setIsChooseTab] = useState<number>(1)
 
-    const [isValueTabOne, setIsValueTabOne] = useState<string>('')
-    const [isValueTabTwo, setIsValueTabTwo] = useState<string>('')
-    const [isValueTabThree, setIsValueTabThree] = useState<string>('')
-    const [isValueTabFour, setIsValueTabFour] = useState<string>('')
-    const [isValueTabFive, setIsValueTabFive] = useState<string>('')
+    const [value, setValue] = useState("");
+
+    const { searchValue } = useDebounce(value, 500); // delay 500ms
+
+    useEffect(() => {
+
+        if (!data) return;
+
+        const newData = [...data];
+        newData[isChooseTab - 1].content = searchValue;
+
+        localStorage.setItem('note', JSON.stringify(newData));
+    }, [searchValue]);
+
+
+    useEffect(() => {
+        if (data?.[0]) {
+            setValue(data[0].content)
+        }
+    }, [])
+
+    useEffect(() => {
+
+        const tabData = data.find((item: any) => item.value === isChooseTab);
+
+        if (tabData) {
+            setValue(tabData.content);
+        }
+
+    }, [isChooseTab]);
 
     if (!isNote) return null
+
 
     return (
         <View className="fixed cursor-pointer p-4 flex flex-col gap-4 rounded-lg w-[40rem]   bg-bg-black-90 text-white text-base shadow-sd-primary"
@@ -88,47 +143,34 @@ export default function Note() {
             </div>
             <div className="w-full flex gap-2">
                 {
-                    dataTab.map((item, index) => (
-                        <Button
-                            key={index}
-                            className={`w-full relative text-left gap-2  border  ${item.kind === 'vip' ? 'hover:border-blue-500  hover:bg-blue-500' : 'hover:border-cl-yellow-dark  hover:bg-cl-yellow-dark'} duration-150 ${isChooseTab === item.value ? (
-                                item.kind === 'vip' ? 'bg-blue-500 border-blue-500' : 'bg-cl-yellow-dark border-cl-yellow-dark'
-                            ) : 'bg-transparent border-white'}`}
-                            kind='square'
-                            onClick={() => setIsChooseTab(item.value)}
-                        >
-                            <span className="text-white font-semibold ">{item.label}</span>
-                            {
-                                item.kind === 'vip' && (
-                                    <IonIcon name="diamond" className="text-lg text-white" />
-                                )
-                            }
-                        </Button>
-                    ))
+                    dataTab.map((item, index) => {
+                        if (!account?.vip?.isVip && index > 2) return null
+                        return (
+                            <Button
+                                key={index}
+                                className={`w-full relative text-left gap-2  border  ${item.kind === 'vip' ? 'hover:border-blue-500  hover:bg-blue-500' : 'hover:border-cl-yellow-dark  hover:bg-cl-yellow-dark'} duration-150 ${isChooseTab === item.value ? (
+                                    item.kind === 'vip' ? 'bg-blue-500 border-blue-500' : 'bg-cl-yellow-dark border-cl-yellow-dark'
+                                ) : 'bg-transparent border-white'}`}
+                                kind='square'
+                                onClick={() => setIsChooseTab(item.value)}
+                            >
+                                <span className="text-white font-semibold ">{item.label}</span>
+                                {
+                                    item.kind === 'vip' && (
+                                        <IonIcon name="diamond" className="text-lg text-white" />
+                                    )
+                                }
+                            </Button>
+                        )
+                    })
                 }
             </div>
             <textarea className="w-full p-2 rounded-lg text-black bg-[#ffffff] outline-none h-[10rem]"
-                value={isChooseTab === 1 ? isValueTabOne : isChooseTab === 2 ? isValueTabTwo : isChooseTab === 3 ? isValueTabThree : isChooseTab === 4 ? isValueTabFour : isValueTabFive}
-                onChange={(e) => {
-                    if (isChooseTab === 1) {
-                        setIsValueTabOne(e.target.value)
-                    }
-                    if (isChooseTab === 2) {
-                        setIsValueTabTwo(e.target.value)
-                    }
-                    if (isChooseTab === 3) {
-                        setIsValueTabThree(e.target.value)
-                    }
-                    if (isChooseTab === 4) {
-                        setIsValueTabFour(e.target.value)
-                    }
-                    if (isChooseTab === 5) {
-                        setIsValueTabFive(e.target.value)
-                    }
-                }}
+                value={value}
+                onChange={e => setValue(e.target.value)}
             />
             <i>
-                <p className="text-sm text-gray-400">* Lưu ý: Hỗ trợ bạn ghi chú nội dung làm việc của bạn. Nội dung sẽ không được lưu lại</p>
+                <p className="text-sm text-gray-400">* Lưu ý: Hỗ trợ bạn ghi chú nội dung làm việc của bạn. Nội dung ở trang 1 không lưu lại.</p>
             </i>
         </View>
     )

@@ -33,7 +33,7 @@ export default function SeeNotice({ notice, close }: SeeNoticeProps) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className='bg-white rounded-lg px-4 pt-8 py-4 w-[30rem] relative overflow-y-auto'
+                className='bg-black text-white rounded-lg px-4 pt-8 py-4 w-[30rem] relative overflow-y-auto'
             >
                 <h1 className='font-sans font-bold text-xl'>{notice?.title}</h1>
                 <p className='mt-4 text-base'><span className='text-[16px] font-semibold'>Nội dung :</span> {notice?.content}</p>

@@ -9,6 +9,7 @@ export type ModeState = {
     greetings: Greetings | null;
     isTabYoutube: boolean;
     isNote: boolean;
+    isLink: boolean;
 };
 
 export type Greetings = {

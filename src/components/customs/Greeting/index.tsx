@@ -31,7 +31,7 @@ export default function Greeting() {
     if (!isShowGreeting) return null
 
     return (
-        <View className='fixed z-50 bottom-[16rem] cursor-pointer left-[8rem] max-w-[30rem]'
+        <View className='fixed z-40 bottom-[16rem] cursor-pointer left-[8rem] max-w-[30rem]'
             drag
         >
             {
@@ -44,7 +44,7 @@ export default function Greeting() {
                                 <Image src={'https://i.pinimg.com/564x/68/87/23/688723a19a837a3dd3f63ad8577c5171.jpg'} className='w-full h-full object-cover' alt='' width={500} height={500} />
                             </div>
                         </h1>
-                        <i className='text-white text-base'>`&quot;`{greeting?.content}`&quot;`</i>
+                        <i className='text-white text-base'>&quot;{greeting?.content}&quot;</i>
                     </div>
                 ) : null
             }
