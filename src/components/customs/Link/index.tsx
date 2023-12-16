@@ -11,45 +11,45 @@ import Link from "next/link"
 
 export default function Links() {
 
-    // const [isListLink, setIsListLink] = useState<string[]>([])
+    const [isListLink, setIsListLink] = useState<string[]>([])
 
     const isLink = useAppSelector(state => state.mode.isLink)
-    // const [isError, setIsError] = useState(false)
-    // const dispatch = useAppDispatch()
+    const [isError, setIsError] = useState(false)
+    const dispatch = useAppDispatch()
 
-    // // save link to localstorage
-    // const handleSaveLink = (link: string) => {
+    // save link to localstorage
+    const handleSaveLink = (link: string) => {
 
-    //     // check link
-    //     const check = link.includes('http')
-    //     if (!check) {
-    //         setIsError(true)
-    //         return
-    //     } else {
-    //         setIsError(false)
-    //     }
+        // check link
+        const check = link.includes('http')
+        if (!check) {
+            setIsError(true)
+            return
+        } else {
+            setIsError(false)
+        }
 
-    //     const listLink = localStorage.getItem('listLink')
-    //     if (listLink) {
-    //         const list = JSON.parse(listLink)
-    //         const check = list.find((item: string) => item === link)
-    //         if (!check) {
-    //             list.push(link)
-    //             localStorage.setItem('listLink', JSON.stringify(list))
+        const listLink = localStorage.getItem('listLink')
+        if (listLink) {
+            const list = JSON.parse(listLink)
+            const check = list.find((item: string) => item === link)
+            if (!check) {
+                list.push(link)
+                localStorage.setItem('listLink', JSON.stringify(list))
 
-    //             setIsListLink(list)
-    //         }
-    //     } else {
-    //         localStorage.setItem('listLink', JSON.stringify([link]))
+                setIsListLink(list)
+            }
+        } else {
+            localStorage.setItem('listLink', JSON.stringify([link]))
 
-    //         setIsListLink([link])
-    //     }
-    // }
+            setIsListLink([link])
+        }
+    }
 
-    // useEffect(() => {
-    //     const list = localStorage.getItem("listLink");
-    //     setIsListLink(list ? JSON.parse(list) : []);
-    // }, [])
+    useEffect(() => {
+        const list = localStorage.getItem("listLink");
+        setIsListLink(list ? JSON.parse(list) : []);
+    }, [])
 
     if (!isLink) return null
 
@@ -60,7 +60,7 @@ export default function Links() {
             exit={{ opacity: 0, x: 100 }}
             drag
         >
-            {/* <div className="w-full flex justify-between items-center">
+            <div className="w-full flex justify-between items-center">
                 <h1 className="font-sans font-semibold text-base">Lưu đường dẫn</h1>
                 <Button
                     onClick={() => dispatch(ModeAction.setLink(false))}
@@ -105,7 +105,7 @@ export default function Links() {
                         </div>
                     </div>
                 )
-            } */}
+            }
         </View >
     )
 }
