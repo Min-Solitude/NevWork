@@ -37,30 +37,6 @@ const dataTab = [
     }
 ]
 
-const defaultData = [
-    {
-        value: 1,
-        content: ""
-    },
-    {
-        value: 2,
-        content: ""
-    },
-    {
-        value: 3,
-        content: ""
-    },
-    {
-        value: 4,
-        content: ""
-    },
-    {
-        value: 5,
-        content: ""
-    }
-];
-
-
 export default function Note() {
 
     const data = JSON.parse(
