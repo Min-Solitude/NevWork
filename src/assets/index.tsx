@@ -17,7 +17,7 @@ import imageVideoHouseNight from './imgs/housevideonight.png'
 
 // VIP
 
-import foxday from './imgs/vip/foxday.jpg'
+import foxday from './imgs/vip/foxday.gif'
 import foxnight from './imgs/vip/foxnight.jpg'
 
 import foxvideoday from './imgs/vip/foxvideoday.png'
@@ -29,7 +29,7 @@ import japannight from './imgs/vip/japannight.jpg'
 import japanvideoday from './imgs/vip/japanvideoday.png'
 import japanvideonight from './imgs/vip/japanvideonight.png'
 
-import cacday from './imgs/vip/cacday.jpg'
+import cacday from './imgs/vip/cacday.gif'
 import cacnight from './imgs/vip/cacnight.jpg'
 
 import cacvideoday from './imgs/vip/cacvideoday.png'

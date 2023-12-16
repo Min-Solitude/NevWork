@@ -63,7 +63,7 @@ export default function Links() {
             <div className="w-full flex justify-between items-center">
                 <h1 className="font-sans font-semibold text-base">Lưu đường dẫn</h1>
                 <Button
-                    onClick={() => dispatch(ModeAction.setNote(false))}
+                    onClick={() => dispatch(ModeAction.setLink(false))}
                 >
                     <IonIcon name='close' className='text-xl text-cl-btn-light-bg-primary' />
                 </Button>
