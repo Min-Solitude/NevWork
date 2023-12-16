@@ -15,6 +15,34 @@ const initialState: ModeState = {
     isTabYoutube: false,
     isNote: false,
     isLink: false,
+    isListNote: [
+        {
+            value: 1,
+            content: '',
+            kind: 'default',
+        },
+        {
+            value: 2,
+            content: '',
+            kind: 'default',
+        },
+        {
+            value: 3,
+            content: '',
+            kind: 'default',
+        },
+        {
+            value: 4,
+            content: '',
+            kind: 'vip',
+        },
+        {
+            value: 5,
+            content: '',
+            kind: 'vip',
+        },
+    ],
+    isListLink: [],
 };
 
 export const setThemeVideo = createAsyncThunk('mode/setThemeVideo', async (theme: string) => {
@@ -69,6 +97,36 @@ const reducer = createSlice({
         },
         setLink: (state, action) => {
             state.isLink = action.payload;
+        },
+        setListNote: (state, action) => {
+            if (action.payload.value === 1) {
+                state.isListNote[0].content = action.payload.content;
+            }
+
+            if (action.payload.value === 2) {
+                state.isListNote[1].content = action.payload.content;
+            }
+
+            if (action.payload.value === 3) {
+                state.isListNote[2].content = action.payload.content;
+            }
+
+            if (action.payload.value === 4) {
+                state.isListNote[3].content = action.payload.content;
+            }
+
+            if (action.payload.value === 5) {
+                state.isListNote[4].content = action.payload.content;
+            }
+        },
+        setListLink: (state, action) => {
+            if (state.isListLink.includes(action.payload)) {
+                return;
+            }
+            state.isListLink.push(action.payload);
+        },
+        deleteListLink: (state, action) => {
+            state.isListLink = state.isListLink.filter((item) => item !== action.payload);
         },
     },
     extraReducers: (builder) => {

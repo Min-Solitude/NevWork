@@ -10,10 +10,18 @@ export type ModeState = {
     isTabYoutube: boolean;
     isNote: boolean;
     isLink: boolean;
+    isListNote: Note[];
+    isListLink: string[];
 };
 
 export type Greetings = {
     content: string;
     status: boolean;
     title: string;
+};
+
+export type Note = {
+    value: number;
+    content: string;
+    kind: string;
 };

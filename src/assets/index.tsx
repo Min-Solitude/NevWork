@@ -23,7 +23,7 @@ import foxnight from './imgs/vip/foxnight.jpg'
 import foxvideoday from './imgs/vip/foxvideoday.png'
 import foxvideonight from './imgs/vip/foxvideonight.png'
 
-import japanday from './imgs/vip/japanday.jpg'
+import japanday from './imgs/vip/japanday.gif'
 import japannight from './imgs/vip/japannight.jpg'
 
 import japanvideoday from './imgs/vip/japanvideoday.png'

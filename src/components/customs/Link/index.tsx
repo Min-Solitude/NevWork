@@ -11,15 +11,14 @@ import Link from "next/link"
 
 export default function Links() {
 
-    const [isListLink, setIsListLink] = useState<string[]>([])
-
     const isLink = useAppSelector(state => state.mode.isLink)
     const [isError, setIsError] = useState(false)
     const dispatch = useAppDispatch()
 
+    const isListLink = useAppSelector(state => state.mode.isListLink)
+
     // save link to localstorage
     const handleSaveLink = (link: string) => {
-
         // check link
         const check = link.includes('http')
         if (!check) {
@@ -29,27 +28,9 @@ export default function Links() {
             setIsError(false)
         }
 
-        const listLink = localStorage.getItem('listLink')
-        if (listLink) {
-            const list = JSON.parse(listLink)
-            const check = list.find((item: string) => item === link)
-            if (!check) {
-                list.push(link)
-                localStorage.setItem('listLink', JSON.stringify(list))
-
-                setIsListLink(list)
-            }
-        } else {
-            localStorage.setItem('listLink', JSON.stringify([link]))
-
-            setIsListLink([link])
-        }
+        // save link
+        dispatch(ModeAction.setListLink(link))
     }
-
-    useEffect(() => {
-        const list = localStorage.getItem("listLink");
-        setIsListLink(list ? JSON.parse(list) : []);
-    }, [])
 
     if (!isLink) return null
 
@@ -96,10 +77,17 @@ export default function Links() {
                 isListLink.length > 0 && (
                     <div className="mt-4">
                         <h1 className='font-sans font-semibold text-base mt-2'>Danh sách</h1>
-                        <div className='flex flex-col gap-2 mt-2'>
+                        <div className='flex flex-col gap-3 mt-2 max-h-[10rem] overflow-y-scroll'>
                             {
                                 isListLink.map((item: string, index: number) => (
-                                    <Link href={item} target='_blank' key={index} className='text-sm hover:underline'>{item}</Link>
+                                    <div key={index} className="w-full flex justify-between items-start">
+                                        <Link href={item} target='_blank' className='text-sm flex-1 line-clamp-1 hover:underline'>{item}</Link>
+                                        <Button
+                                            onClick={() => dispatch(ModeAction.deleteListLink(item))}
+                                        >
+                                            <IonIcon name='trash' className='text-xl text-cl-btn-light-bg-primary' />
+                                        </Button>
+                                    </div>
                                 ))
                             }
                         </div>

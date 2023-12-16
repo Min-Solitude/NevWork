@@ -39,9 +39,6 @@ const dataTab = [
 
 export default function Note() {
 
-    const data = JSON.parse(
-        localStorage.getItem("note") ?? '[]'
-    );
 
     const isNote = useAppSelector(state => state.mode.isNote)
     const dispatch = useAppDispatch()
@@ -51,38 +48,28 @@ export default function Note() {
     const [isChooseTab, setIsChooseTab] = useState<number>(1)
 
     const [value, setValue] = useState("");
-
     const { searchValue } = useDebounce(value, 500); // delay 500ms
 
-    useEffect(() => {
-
-        if (!data) return;
-
-        const newData = [...data];
-        newData[isChooseTab - 1].content = searchValue;
-
-        localStorage.setItem('note', JSON.stringify(newData));
-    }, [searchValue]);
-
+    const isListNote = useAppSelector(state => state.mode.isListNote)
 
     useEffect(() => {
-        if (data?.[0]) {
-            setValue(data[0].content)
+        const note = isListNote.find(n => n.value === isChooseTab);
+
+        if (note) {
+            setValue(note.content);
         }
-    }, [])
-
-    useEffect(() => {
-
-        const tabData = data.find((item: any) => item.value === isChooseTab);
-
-        if (tabData) {
-            setValue(tabData.content);
-        }
-
     }, [isChooseTab]);
 
-    if (!isNote) return null
+    useEffect(() => {
+        if (searchValue) {
+            dispatch(ModeAction.setListNote({
+                value: isChooseTab,
+                content: searchValue
+            }))
+        }
+    }, [searchValue])
 
+    if (!isNote) return null
 
     return (
         <View className="fixed cursor-pointer p-4 flex flex-col gap-4 rounded-lg w-[40rem]   bg-bg-black-90 text-white text-base shadow-sd-primary"
@@ -146,7 +133,7 @@ export default function Note() {
                 onChange={e => setValue(e.target.value)}
             />
             <i>
-                <p className="text-sm text-gray-400">* Lưu ý: Hỗ trợ bạn ghi chú nội dung làm việc của bạn. Nội dung ở trang 1 không lưu lại.</p>
+                <p className="text-sm text-gray-400">* Lưu ý: Nội dung note sẽ tự động lưu khi bạn nhập vào</p>
             </i>
         </View>
     )
