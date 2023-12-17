@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Greetings, ModeState } from './mode.type';
+import { FileTray, Greetings, ModeState } from './mode.type';
 import { collection, doc, getDoc } from 'firebase/firestore';
 import { db } from '@/configs/firebase.config';
 
@@ -12,6 +12,7 @@ const initialState: ModeState = {
     kindScreen: true,
     isGreetings: true,
     greetings: null,
+    fileTray: null,
     isTabYoutube: false,
     isNote: false,
     isLink: false,
@@ -43,6 +44,7 @@ const initialState: ModeState = {
         },
     ],
     isListLink: [],
+    isShowFile: false,
 };
 
 export const setThemeVideo = createAsyncThunk('mode/setThemeVideo', async (theme: string) => {
@@ -61,6 +63,19 @@ export const getGreetings = createAsyncThunk('mode/getGreetings', async () => {
     const noticeRef = collection(db, 'setting');
 
     const docSetting = await getDoc(doc(noticeRef, 'Greeting'));
+
+    if (!docSetting.exists()) {
+        // Tài liệu không tồn tại
+        return null;
+    } else {
+        return docSetting.data();
+    }
+});
+
+export const getFileTray = createAsyncThunk('mode/getFileTray', async () => {
+    const noticeRef = collection(db, 'setting');
+
+    const docSetting = await getDoc(doc(noticeRef, 'FileTray'));
 
     if (!docSetting.exists()) {
         // Tài liệu không tồn tại
@@ -128,6 +143,12 @@ const reducer = createSlice({
         deleteListLink: (state, action) => {
             state.isListLink = state.isListLink.filter((item) => item !== action.payload);
         },
+        setShowFile: (state, action) => {
+            state.isShowFile = action.payload;
+            state.isTabYoutube = false;
+            state.isNote = false;
+            state.isLink = false;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(setThemeVideo.fulfilled, (state, action) => {
@@ -149,6 +170,16 @@ const reducer = createSlice({
                     content: action.payload.content,
                     status: action.payload.status,
                 } as Greetings;
+            }
+        });
+
+        builder.addCase(getFileTray.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.fileTray = {
+                    title: action.payload.title,
+                    background: action.payload.background,
+                    status: action.payload.status,
+                } as FileTray;
             }
         });
     },

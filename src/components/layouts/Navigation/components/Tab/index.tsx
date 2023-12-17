@@ -1,3 +1,5 @@
+'use client'
+
 import Button from '@/components/customs/Button'
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux'
 import { ModeAction } from '@/store/reducers/mode/mode.reducer'

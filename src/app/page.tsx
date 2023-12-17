@@ -14,6 +14,7 @@ const ManagerBackground = dynamic(() => import('@/components/customs/ManagerBack
 const Greeting = dynamic(() => import('@/components/customs/Greeting'), { ssr: false })
 const Note = dynamic(() => import('@/components/customs/Note'), { ssr: false })
 const Links = dynamic(() => import('@/components/customs/Link'), { ssr: false })
+const FileTray = dynamic(() => import('@/components/customs/FileTray'), { ssr: false })
 
 export default function HomePage() {
 
@@ -24,6 +25,7 @@ export default function HomePage() {
         <TabYoutube />
         <Note />
         <Links />
+        <FileTray />
         <div className=' flex-1 max-w-[18rem]'>1</div>
         <div className="flex-1 h-full flex justify-center items-center">
           <ManagerBackground />

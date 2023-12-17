@@ -1,5 +1,3 @@
-'use client'
-
 import CDMusic from '@/components/customs/CDMusic'
 import View from '@/motions/View'
 import dynamic from 'next/dynamic'
@@ -12,6 +10,7 @@ const Time = dynamic(() => import('./components/Time'), { ssr: false })
 const Music = dynamic(() => import('./components/Music'), { ssr: false })
 const Image = dynamic(() => import('./components/Image'), { ssr: false })
 const Tab = dynamic(() => import('./components/Tab'), { ssr: false })
+const Tool = dynamic(() => import('./components/Tool'), { ssr: false })
 
 export default function Navigation({ className }: NavigationProps) {
 
@@ -34,7 +33,7 @@ export default function Navigation({ className }: NavigationProps) {
                         <Music />
                     </div>
                     <div className='flex gap-2 items-center'>
-                        1
+                        <Tool />
                     </div>
                 </View>
             </div>
