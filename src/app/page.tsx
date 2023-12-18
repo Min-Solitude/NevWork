@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import MainLayout from "./(mainLayout)/layout";
 import dynamic from 'next/dynamic';
-import TabYoutube from '@/components/customs/TabYoutube';
 
 export const metadata: Metadata = {
   title: {
@@ -15,6 +14,8 @@ const Greeting = dynamic(() => import('@/components/customs/Greeting'), { ssr: f
 const Note = dynamic(() => import('@/components/customs/Note'), { ssr: false })
 const Links = dynamic(() => import('@/components/customs/Link'), { ssr: false })
 const FileTray = dynamic(() => import('@/components/customs/FileTray'), { ssr: false })
+const ListMusic = dynamic(() => import('@/components/customs/ListMusic'), { ssr: false })
+const TabYoutube = dynamic(() => import('@/components/customs/TabYoutube'), { ssr: false })
 
 export default function HomePage() {
 
@@ -25,6 +26,7 @@ export default function HomePage() {
         <TabYoutube />
         <Note />
         <Links />
+        <ListMusic />
         <FileTray />
         <div className=' flex-1 max-w-[18rem]'>1</div>
         <div className="flex-1 h-full flex justify-center items-center">

@@ -3,9 +3,10 @@ import { MusicState } from './music.type';
 
 const initialState: MusicState = {
     status: true,
-    nameMusic: 'lofi-cat',
     volume: 0.5,
     order: 0,
+    changeFrameMusic: false,
+    showListMusic: false,
 };
 
 const reducer = createSlice({
@@ -14,6 +15,9 @@ const reducer = createSlice({
     reducers: {
         setStatusMusic: (state, action) => {
             state.status = action.payload;
+        },
+        setOrderMusic: (state, action) => {
+            state.order = action.payload;
         },
         setNextOrderMusic: (state) => {
             if (state.order < 5) {
@@ -28,6 +32,15 @@ const reducer = createSlice({
             } else {
                 state.order = 5;
             }
+        },
+        setVolumeMusic: (state, action) => {
+            state.volume = action.payload;
+        },
+        setChangeFrameMusic: (state, action) => {
+            state.changeFrameMusic = action.payload;
+        },
+        setShowListMusic: (state, action) => {
+            state.showListMusic = action.payload;
         },
     },
     extraReducers: (builder) => {},

@@ -2,11 +2,11 @@ import { auth, db, storage } from '@/configs/firebase.config';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { deleteCookie } from 'cookies-next';
 import { signOut, updatePassword } from 'firebase/auth';
+import { EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth/cordova';
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { toast } from 'react-toastify';
 import { AuthState, User } from './auth.type';
-import { EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth/cordova';
 
 const initialState: AuthState = {
     account: null,

@@ -179,6 +179,7 @@ const reducer = createSlice({
                     title: action.payload.title,
                     background: action.payload.background,
                     status: action.payload.status,
+                    noticeErr: action.payload.noticeErr,
                 } as FileTray;
             }
         });

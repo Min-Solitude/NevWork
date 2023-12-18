@@ -41,6 +41,8 @@ import skynight from './imgs/vip/skynight.jpg'
 import skyvideoday from './imgs/vip/skyvideoday.png'
 import skyvideonight from './imgs/vip/skyvideonight.png'
 
+// import chillMusic from './music/'
+
 export const IMAGES = {
     sofi,
     avatar,
@@ -71,4 +73,3 @@ export const IMAGES = {
     skyvideoday,
     skyvideonight,
 }
-

@@ -26,6 +26,7 @@ export type FileTray = {
     title: string;
     status: boolean;
     background: string;
+    noticeErr: string;
 };
 
 export type Note = {
