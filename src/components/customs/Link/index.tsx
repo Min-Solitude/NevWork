@@ -2,12 +2,12 @@
 
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux"
 import View from "@/motions/View"
-import Button from "../Button"
-import IonIcon from "@reacticons/ionicons"
 import { ModeAction } from "@/store/reducers/mode/mode.reducer"
-import Input from "../Input"
-import { useEffect, useState } from "react"
+import IonIcon from "@reacticons/ionicons"
 import Link from "next/link"
+import { useState } from "react"
+import Button from "../Button"
+import Input from "../Input"
 
 export default function Links() {
 

@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/useRedux'
 import View from '@/motions/View'
 import { MusicAction } from '@/store/reducers/music/music.reducer'
 import IonIcon from '@reacticons/ionicons'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function Music() {
 
@@ -16,6 +16,10 @@ export default function Music() {
 
     const statusMusic = useAppSelector(state => state.music.status)
     const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(MusicAction.setStatusMusic(false))
+    }, [])
 
     return (
         <div className='flex items-center gap-4'>

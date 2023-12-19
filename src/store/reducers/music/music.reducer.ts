@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { MusicState } from './music.type';
 
 const initialState: MusicState = {
-    status: true,
+    status: false,
     volume: 0.5,
     order: 0,
     changeFrameMusic: false,

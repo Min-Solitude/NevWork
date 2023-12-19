@@ -130,6 +130,38 @@ export const handleAuthUpdatePassword = createAsyncThunk(
     },
 );
 
+export const handeleSendStory = createAsyncThunk(
+    'auth/handleSendStory',
+    async (payload: { story: any; uidSend: any }) => {
+        try {
+            // date send
+            const date = new Date();
+            const dateSend = date.getTime();
+
+            const userDocRef = doc(db, 'stories', payload.uidSend);
+            const docSnap = await getDoc(userDocRef);
+
+            if (docSnap.exists()) {
+                // update new avatar
+                await updateDoc(userDocRef, {
+                    story: payload.story,
+                    dateSend,
+                    status: 'pending',
+                });
+            } else {
+                await setDoc(userDocRef, {
+                    story: payload.story,
+                    uid: payload.uidSend,
+                    dateSend,
+                    status: 'pending',
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
+);
+
 const reducer = createSlice({
     name: 'auth',
     initialState,
@@ -193,6 +225,18 @@ const reducer = createSlice({
             } else {
                 toast.error('Cập nhật mật khẩu thất bại');
             }
+        });
+
+        builder.addCase(handeleSendStory.fulfilled, (state) => {
+            state.loading = false;
+            toast.success('Đăng story thành công');
+        });
+        builder.addCase(handeleSendStory.rejected, (state) => {
+            state.loading = false;
+            toast.error('Đăng story thất bại');
+        });
+        builder.addCase(handeleSendStory.pending, (state) => {
+            state.loading = true;
         });
     },
 });
