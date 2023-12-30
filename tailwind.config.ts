@@ -23,6 +23,10 @@ const config: Config = {
 
                 'cl-btn-light-bd-primary': '#e0e0e0',
                 'cl-btn-dark-bd-primary': '#2c2c2c',
+
+                'cl-orange-primary': '#e37b58',
+                'cl-orange-secondary': '#f8d1b4',
+                'cl-orange-tertiary': '#fdf7eb',
             },
             backgroundColor: {
                 'bg-black-90': '#00000090',
