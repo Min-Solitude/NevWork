@@ -45,6 +45,7 @@ const initialState: ModeState = {
     ],
     isListLink: [],
     isShowFile: false,
+    header: null,
 };
 
 export const setThemeVideo = createAsyncThunk('mode/setThemeVideo', async (theme: string) => {
@@ -76,6 +77,19 @@ export const getFileTray = createAsyncThunk('mode/getFileTray', async () => {
     const noticeRef = collection(db, 'setting');
 
     const docSetting = await getDoc(doc(noticeRef, 'FileTray'));
+
+    if (!docSetting.exists()) {
+        // Tài liệu không tồn tại
+        return null;
+    } else {
+        return docSetting.data();
+    }
+});
+
+export const getHeader = createAsyncThunk('mode/getHeader', async () => {
+    const noticeRef = collection(db, 'setting');
+
+    const docSetting = await getDoc(doc(noticeRef, 'Header'));
 
     if (!docSetting.exists()) {
         // Tài liệu không tồn tại
@@ -164,11 +178,14 @@ const reducer = createSlice({
         });
 
         builder.addCase(getGreetings.fulfilled, (state, action) => {
+            
             if (action.payload) {
                 state.greetings = {
                     title: action.payload.title,
                     content: action.payload.content,
                     status: action.payload.status,
+                    image: action.payload.image,
+                    layout: action.payload.layout,
                 } as Greetings;
             }
         });
@@ -181,6 +198,20 @@ const reducer = createSlice({
                     status: action.payload.status,
                     noticeErr: action.payload.noticeErr,
                 } as FileTray;
+            }
+        });
+
+        builder.addCase(getHeader.fulfilled, (state, action) => {            
+            if (action.payload) {
+                state.header = {
+                    btnDarkMode: action.payload.btnDarkMode,
+                    btnFullScreen: action.payload.btnFullscreen,
+                    btnNotice: action.payload.btnNotice,
+                    layout: action.payload.layout,
+                    logo: action.payload.logo,
+                    profile: action.payload.profile,
+                    status: action.payload.status,
+                };
             }
         });
     },

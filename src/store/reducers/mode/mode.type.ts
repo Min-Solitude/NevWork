@@ -14,12 +14,15 @@ export type ModeState = {
     isListLink: string[];
     fileTray: FileTray | null;
     isShowFile: boolean;
+    header: Header | null;
 };
 
 export type Greetings = {
     content: string;
     status: boolean;
     title: string;
+    image: string;
+    layout: boolean;    
 };
 
 export type FileTray = {
@@ -34,3 +37,13 @@ export type Note = {
     content: string;
     kind: string;
 };
+
+export type Header = {
+    btnDarkMode: boolean;
+    btnFullScreen: boolean;
+    btnNotice: boolean;
+    layout: boolean;
+    logo: string;
+    profile: boolean;
+    status: boolean;
+}
