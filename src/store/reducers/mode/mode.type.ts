@@ -15,6 +15,7 @@ export type ModeState = {
     fileTray: FileTray | null;
     isShowFile: boolean;
     header: Header | null;
+    loading: boolean;
 };
 
 export type Greetings = {

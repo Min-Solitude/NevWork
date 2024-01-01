@@ -1,4 +1,3 @@
-import { IMAGES } from '@/assets';
 import { Header } from '@/store/reducers/mode/mode.type';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,13 +10,13 @@ type LogoProps = {
 };
 
 export default function Logo({ className, kind = 'default', color = 'default', header }: LogoProps) {
-    console.log(header);
-
     return (
         <Link href="/" className={`flex justify-center items-center`}>
             <Image
-                src={IMAGES.sofi}
+                src={header?.logo}
+                width={100}
                 alt="sofi"
+                height={100}
                 className={`${
                     kind === 'small'
                         ? 'w-[40px]'
