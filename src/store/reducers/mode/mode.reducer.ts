@@ -46,7 +46,6 @@ const initialState: ModeState = {
     isListLink: [],
     isShowFile: false,
     header: null,
-    loading: true,
 };
 
 export const setThemeVideo = createAsyncThunk('mode/setThemeVideo', async (theme: string) => {
@@ -164,9 +163,6 @@ const reducer = createSlice({
             state.isNote = false;
             state.isLink = false;
         },
-        setLoading: (state, action) => {
-            state.loading = action.payload;
-        }
     },
     extraReducers: (builder) => {
         builder.addCase(setThemeVideo.fulfilled, (state, action) => {

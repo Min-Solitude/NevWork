@@ -1,12 +1,8 @@
 'use client';
 
 import { IMAGES } from '@/assets';
-import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
-import View from '@/motions/View';
-import { ModeAction } from '@/store/reducers/mode/mode.reducer';
-import { AnimatePresence } from 'framer-motion';
+import { useAppSelector } from '@/hooks/useRedux';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 
 type BackgroundThemeProps = {
     className?: string;
@@ -19,33 +15,6 @@ export default function BackgroundTheme({ className, Bgfor = 'main' }: Backgroun
     const isNameVideo = useAppSelector((state) => state.mode.nameScreen);
 
     const account = useAppSelector((state) => state.auth.account);
-
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 1500);
-    }, []);
-
-    if (loading) {
-        return (
-            <AnimatePresence>
-                <View
-                    className="fixed z-50 top-0 left-0 bottom-0 right-0 bg-[#edc58a] flex justify-center items-center"
-                    transition={{ duration: 1 }}
-                >
-                    <Image
-                        src={'https://i.pinimg.com/originals/ed/17/0e/ed170ece742e2bc761f0d9742056f430.gif'}
-                        width={300}
-                        height={300}
-                        alt=""
-                    />
-                </View>
-            </AnimatePresence>
-        );
-    }
 
     if (!isKindScreen) {
         if (Bgfor === 'main') {
