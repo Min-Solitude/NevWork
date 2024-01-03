@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { FileTray, Greetings, ModeState } from './mode.type';
-import { collection, doc, getDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '@/configs/firebase.config';
 
 const initialState: ModeState = {
@@ -46,6 +46,7 @@ const initialState: ModeState = {
     isListLink: [],
     isShowFile: false,
     header: null,
+    background: null,
 };
 
 export const setThemeVideo = createAsyncThunk('mode/setThemeVideo', async (theme: string) => {
@@ -97,6 +98,30 @@ export const getHeader = createAsyncThunk('mode/getHeader', async () => {
     } else {
         return docSetting.data();
     }
+});
+
+export const getBackground = createAsyncThunk('mode/getBackground', async () => {
+    try {
+        const backgroundsRef = collection(db, 'background');
+
+        // Lấy tất cả documents trong collection 
+        const snapshot = await getDocs(backgroundsRef);
+        
+        // Duyệt qua các documents
+        let backgrounds: any = [];
+        snapshot.forEach(doc => {
+          // Thêm mỗi document vào mảng kết quả
+          backgrounds.push({ 
+            id: doc.id,
+            ...doc.data()
+          }) 
+        });
+        
+        // Trả về mảng chứa data của các document
+        return backgrounds;
+     } catch (error) {
+            console.log('error', error);
+     }
 });
 
 const reducer = createSlice({
@@ -212,6 +237,11 @@ const reducer = createSlice({
                     profile: action.payload.profile,
                     status: action.payload.status,
                 };
+            }
+        });
+        builder.addCase(getBackground.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.background = action.payload; 
             }
         });
     },

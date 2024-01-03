@@ -71,8 +71,6 @@ export default function Notice({ header }: NoticeProps) {
         }
     }, [notice]);
 
-    console.log(header?.layout);
-
     return (
         <div className="flex justify-center relative items-center min-w-[2rem]">
             {isShowDetail && <SeeNotice notice={isShowDetail} close={() => setIsShowDetail(null)} />}

@@ -1,8 +1,11 @@
 'use client';
 
 import { IMAGES } from '@/assets';
-import { useAppSelector } from '@/hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
+import { getBackground } from '@/store/reducers/mode/mode.reducer';
+import { Background } from '@/store/reducers/mode/mode.type';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 type BackgroundThemeProps = {
     className?: string;
@@ -13,14 +16,55 @@ export default function BackgroundTheme({ className, Bgfor = 'main' }: Backgroun
     const isMode = useAppSelector((state) => state.mode.theme);
     const isKindScreen = useAppSelector((state) => state.mode.kindScreen);
     const isNameVideo = useAppSelector((state) => state.mode.nameScreen);
+    const dispatch = useAppDispatch();
 
     const account = useAppSelector((state) => state.auth.account);
+
+    const background = useAppSelector((state) => state.mode.background) as any;
+
+    useEffect(() => {
+        dispatch(getBackground());
+    }, []);
 
     if (!isKindScreen) {
         if (Bgfor === 'main') {
             return (
                 <div className="h-full duration-150 bg-white">
-                    {isNameVideo === 'room' ? (
+                    {isNameVideo === 'room' && (
+                        <Image
+                            key={isNameVideo}
+                            src={isMode === 'day' ? IMAGES.roomday : IMAGES.roomnight}
+                            width={1980}
+                            height={1440}
+                            className="w-full h-full object-cover"
+                            alt="sofi"
+                        />
+                    )}
+                    {background ? (
+                        background.map(
+                            (item: Background, index: number) =>
+                                item.name === isNameVideo && (
+                                    <Image
+                                        key={index}
+                                        src={isMode === 'day' ? item.backgroundDay : item.backgroundNight}
+                                        width={1980}
+                                        height={1440}
+                                        className="w-full h-full object-cover"
+                                        alt="sofi"
+                                    />
+                                ),
+                        )
+                    ) : (
+                        <Image
+                            src={isMode === 'day' ? IMAGES.roomday : IMAGES.roomnight}
+                            width={1980}
+                            height={1440}
+                            className="w-full h-full object-cover"
+                            alt="sofi"
+                        />
+                    )}
+
+                    {/* {isNameVideo === 'room' ? (
                         <Image
                             src={isMode === 'day' ? IMAGES.roomday : IMAGES.roomnight}
                             width={1980}
@@ -86,7 +130,7 @@ export default function BackgroundTheme({ className, Bgfor = 'main' }: Backgroun
                             className="w-full h-full object-cover"
                             alt="sofi"
                         />
-                    )}
+                    )} */}
                 </div>
             );
         } else {

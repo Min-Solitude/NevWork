@@ -15,6 +15,7 @@ export type ModeState = {
     fileTray: FileTray | null;
     isShowFile: boolean;
     header: Header | null;
+    background: Background | null;
 };
 
 export type Greetings = {
@@ -46,4 +47,12 @@ export type Header = {
     logo: string;
     profile: boolean;
     status: boolean;
+}
+
+export type Background = {
+    backgroundDay: string;
+    backgroundNight: string;
+    name: string;
+    status: boolean;
+    type: string;
 }
