@@ -19,4 +19,5 @@ export type User = {
         expiredAt: Date | null;
         package: string | null;
     };
+    isMember?: boolean;
 };

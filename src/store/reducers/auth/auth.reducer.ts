@@ -162,6 +162,31 @@ export const handeleSendStory = createAsyncThunk(
     },
 );
 
+export const handleRegisterMemberAccount = createAsyncThunk(
+    'auth/handleRegisterMember',
+    async (payload: { email: string, uid: string }) => {
+        try {
+            const userDocRef = doc(db, 'users', payload.uid);
+            const docSnap = await getDoc(userDocRef);
+
+            if (docSnap.exists()) {
+                await updateDoc(userDocRef, {
+                    isMember: true,
+                    emailMember: payload.email,
+                });
+            } else {
+                await setDoc(userDocRef, {
+                    isMember: true,
+                    emailMember: payload.email,
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
+);
+
+
 const reducer = createSlice({
     name: 'auth',
     initialState,
@@ -237,6 +262,18 @@ const reducer = createSlice({
         });
         builder.addCase(handeleSendStory.pending, (state) => {
             state.loading = true;
+        });
+
+        builder.addCase(handleRegisterMemberAccount.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(handleRegisterMemberAccount.rejected, (state) => {
+            state.loading = false;
+            toast.error('Đăng ký thất bại');
+        });
+        builder.addCase(handleRegisterMemberAccount.fulfilled, (state) => {
+            state.loading = false;
+            toast.success('Đăng ký thành công');
         });
     },
 });

@@ -236,6 +236,7 @@ const reducer = createSlice({
                     logo: action.payload.logo,
                     profile: action.payload.profile,
                     status: action.payload.status,
+                    title: action.payload.title,
                 };
             }
         });

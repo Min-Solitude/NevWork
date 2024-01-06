@@ -1,6 +1,7 @@
 export type NoticeState = {
     listNotice?: Notice[];
     loading?: boolean;
+    GeneralAnnouncement: GeneralAnnouncement;
 };
 
 export type Notice = {
@@ -10,4 +11,13 @@ export type Notice = {
     status?: string;
     title?: string;
     userId?: string;
+};
+
+export type GeneralAnnouncement = {
+    banner: string;
+    content: string;
+    email: boolean;
+    note: string;
+    status: boolean;
+    title: string;
 };

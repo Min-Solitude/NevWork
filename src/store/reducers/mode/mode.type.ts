@@ -47,6 +47,7 @@ export type Header = {
     logo: string;
     profile: boolean;
     status: boolean;
+    title: string;
 }
 
 export type Background = {

@@ -36,7 +36,7 @@ export default function BackgroundDefault({ kindScreen, background }: Background
         );
 
     return (
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center hidden-scrollbar overflow-x-scroll w-[80vw] lg:overscroll-x-none lg:grid lg:grid-cols-4 lg:w-full 2xl:grid-cols-5">
             <Button onClick={() => dispatch(ModeAction.setNameScreen({ name: 'room', kind: 'image' }))}>
                 <Card
                     image={isTheme === 'day' ? IMAGES.roomday : IMAGES.roomnight}

@@ -10,16 +10,15 @@ import { useState } from 'react';
 
 type ProfileInfomationProps = {
     user: any;
-}
+};
 
 export default function ProfileInfomation({ user }: ProfileInfomationProps) {
-
     const dispatch = useAppDispatch();
     const router = useRouter();
 
     const [isBannerUrl, setIsBannerUrl] = useState<any>(null);
     const [isAvatarUrl, setIsAvatarUrl] = useState<any>(null);
-    const isLoading = useAppSelector(state => state.auth.loading);
+    const isLoading = useAppSelector((state) => state.auth.loading);
 
     const [isEdit, setIsEdit] = useState(false);
 
@@ -27,8 +26,8 @@ export default function ProfileInfomation({ user }: ProfileInfomationProps) {
         const payload = {
             isBannerUrl,
             uid: user?.uid,
-        }
-        dispatch(updateBanner(payload))
+        };
+        dispatch(updateBanner(payload));
     };
 
     const handleUpdateProfile = async (e: any) => {
@@ -50,7 +49,7 @@ export default function ProfileInfomation({ user }: ProfileInfomationProps) {
             updates.phoneNumber = data.get('phone');
         }
 
-        await dispatch(updateProfileUser({ data: updates, uid: user?.uid, avatar: isAvatarUrl }))
+        await dispatch(updateProfileUser({ data: updates, uid: user?.uid, avatar: isAvatarUrl }));
 
         setIsEdit(false);
     };
@@ -90,8 +89,8 @@ export default function ProfileInfomation({ user }: ProfileInfomationProps) {
                         isBannerUrl
                             ? URL.createObjectURL(isBannerUrl)
                             : user?.banner
-                                ? user?.banner
-                                : 'https://i.pinimg.com/564x/e7/0f/4b/e70f4b77b7195c4b6081bf1530e9c046.jpg'
+                            ? user?.banner
+                            : 'https://i.pinimg.com/564x/e7/0f/4b/e70f4b77b7195c4b6081bf1530e9c046.jpg'
                     }
                     alt="avatar"
                     width={1440}
@@ -104,21 +103,19 @@ export default function ProfileInfomation({ user }: ProfileInfomationProps) {
                             isAvatarUrl
                                 ? URL.createObjectURL(isAvatarUrl)
                                 : user?.photoURL
-                                    ? user?.photoURL
-                                    : 'https://i.pinimg.com/564x/16/3e/39/163e39beaa36d1f9a061b0f0c5669750.jpg'
+                                ? user?.photoURL
+                                : 'https://i.pinimg.com/564x/16/3e/39/163e39beaa36d1f9a061b0f0c5669750.jpg'
                         }
                         alt="avatar"
                         width={1440}
                         height={1200}
                         className=" w-full rounded-full h-full object-cover"
                     />
-                    {
-                        user?.vip?.isVip && (
-                            <div className='absolute -top-0 -right-0 bg-white flex justify-center items-center p-1 rounded-full'>
-                                <IonIcon name="diamond" className='text-xl text-blue-500' />
-                            </div>
-                        )
-                    }
+                    {user?.vip?.isVip && (
+                        <div className="absolute -top-0 -right-0 bg-white flex justify-center items-center p-1 rounded-full">
+                            <IonIcon name="diamond" className="text-xl text-blue-500" />
+                        </div>
+                    )}
                     <input
                         type="file"
                         accept="image/*"
@@ -131,16 +128,14 @@ export default function ProfileInfomation({ user }: ProfileInfomationProps) {
                         }}
                         id="avatarProfile"
                     />
-                    {
-                        (isEdit && user?.vip?.isVip) && (
-                            <label
-                                htmlFor="avatarProfile"
-                                className="p-1 flex justify-center items-center rounded-full bg-white absolute bottom-0 right-0"
-                            >
-                                <IonIcon name="pencil-outline" className="text-base text-black" />
-                            </label>
-                        )
-                    }
+                    {isEdit && (
+                        <label
+                            htmlFor="avatarProfile"
+                            className="p-1 flex justify-center items-center rounded-full bg-white absolute bottom-0 right-0"
+                        >
+                            <IonIcon name="pencil-outline" className="text-base text-black" />
+                        </label>
+                    )}
                 </div>
             </div>
             <form
@@ -149,24 +144,22 @@ export default function ProfileInfomation({ user }: ProfileInfomationProps) {
                     handleUpdateProfile(e);
                 }}
             >
-                {
-                    user?.loginBy === 'account' && (
-                        <div className="flex flex-col gap-1">
-                            <label htmlFor="account" className="text-cl-yellow-dark font-semibold">
-                                Tài khoản::
-                            </label>
-                            <Input
-                                kind="form"
-                                type="text"
-                                id="account"
-                                name="account"
-                                defaultValue={user?.account ? user?.account : null}
-                                placeholder='Chưa cập nhật'
-                                disabled
-                            />
-                        </div>
-                    )
-                }
+                {user?.loginBy === 'account' && (
+                    <div className="flex flex-col gap-1">
+                        <label htmlFor="account" className="text-cl-yellow-dark font-semibold">
+                            Tài khoản::
+                        </label>
+                        <Input
+                            kind="form"
+                            type="text"
+                            id="account"
+                            name="account"
+                            defaultValue={user?.account ? user?.account : null}
+                            placeholder="Chưa cập nhật"
+                            disabled
+                        />
+                    </div>
+                )}
                 <div className="flex flex-col gap-1">
                     <label htmlFor="username" className="text-cl-yellow-dark font-semibold">
                         Tên người dùng:
@@ -177,7 +170,7 @@ export default function ProfileInfomation({ user }: ProfileInfomationProps) {
                         name="username"
                         type="text"
                         defaultValue={user?.displayName ? user?.displayName : null}
-                        placeholder='Chưa cập nhật'
+                        placeholder="Chưa cập nhật"
                         disabled={!isEdit}
                     />
                 </div>
@@ -191,7 +184,7 @@ export default function ProfileInfomation({ user }: ProfileInfomationProps) {
                         id="phone"
                         name="phone"
                         defaultValue={user?.phoneNumber ? user?.phoneNumber : null}
-                        placeholder='Chưa cập nhật'
+                        placeholder="Chưa cập nhật"
                         disabled={!isEdit}
                     />
                 </div>
@@ -205,36 +198,28 @@ export default function ProfileInfomation({ user }: ProfileInfomationProps) {
                         id="email"
                         name="email"
                         defaultValue={user?.email ? user?.email : null}
-                        placeholder='Chưa cập nhật'
+                        placeholder="Chưa cập nhật"
                         disabled={!isEdit}
                     />
                 </div>
                 <div className="w-full flex gap-4 mt-8">
-                    {
-                        !isEdit && (
-                            <Button
-                                kind="form"
-                                type={'button'}
-                                className="mt-4 flex-1"
-                                onClick={() => {
-                                    setIsEdit(true);
-                                }}
-                            >
-                                Chỉnh sửa
-                            </Button>
-                        )
-                    }
-                    {
-                        isEdit && (
-                            <Button
-                                kind="form"
-                                type={'submit'}
-                                className="mt-4 flex-1"
-                            >
-                                Lưu
-                            </Button>
-                        )
-                    }
+                    {!isEdit && (
+                        <Button
+                            kind="form"
+                            type={'button'}
+                            className="mt-4 flex-1"
+                            onClick={() => {
+                                setIsEdit(true);
+                            }}
+                        >
+                            Chỉnh sửa
+                        </Button>
+                    )}
+                    {isEdit && (
+                        <Button kind="form" type={'submit'} className="mt-4 flex-1">
+                            Lưu
+                        </Button>
+                    )}
                     {isEdit && (
                         <Button
                             kind="form"
@@ -248,5 +233,5 @@ export default function ProfileInfomation({ user }: ProfileInfomationProps) {
                 </div>
             </form>
         </>
-    )
+    );
 }

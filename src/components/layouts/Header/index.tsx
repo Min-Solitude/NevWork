@@ -46,9 +46,14 @@ export default function Header() {
                             </Button>
                         </View>
                     )}
-                    <Image src={IMAGES.ring} alt="" className="w-[13rem]  top-0 translate-y-[30%] -left-8 absolute" />
-                    <div className="m-auto duration-150 w-full px-2 md:px-0 flex justify-between items-center">
+                    {/* <Image src={IMAGES.ring} alt="" className="w-[13rem]  top-0 translate-y-[30%] -left-8 absolute" /> */}
+                    <div className="m-auto duration-150 relative w-full px-2 md:px-0 flex justify-between items-center">
                         {header && <Logo kind="small" header={header} />}
+                        {header?.title.length > 0 && (
+                            <h1 className="absolute left-1/2 translate-x-[-50%] font-dancing bg-gradient-to-r  inline-block text-transparent bg-clip-text from-cl-yellow-dark to-cl-yellow text-3xl">
+                                {header?.title}
+                            </h1>
+                        )}
                         {header && <NavLink header={header} btnHide={() => setIsHidden(!isHidden)} />}
                     </div>
                 </div>

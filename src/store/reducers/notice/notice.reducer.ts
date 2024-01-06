@@ -1,12 +1,20 @@
 import { db } from '@/configs/firebase.config';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { collection, deleteDoc, doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import { Notice, NoticeState } from './notice.type';
 import { toast } from 'react-toastify';
 
 const initialState: NoticeState = {
     listNotice: [],
     loading: false,
+    GeneralAnnouncement: {
+        banner: '',
+        content: '',
+        email: false,
+        note: '',
+        status: false,
+        title: '',
+    },
 };
 
 export const getAllNotice = createAsyncThunk(
@@ -72,6 +80,18 @@ export const deleteNotice = createAsyncThunk('notice/deleteNotice', async (paylo
     return { id: payload.id };
 });
 
+export const getGeneralAnnouncement = createAsyncThunk('notice/getGeneralAnnouncement', async () => {
+    const GeneralAnnouncementRef = collection(db, 'setting');
+
+    const docSetting = await getDoc(doc(GeneralAnnouncementRef, 'Noti'));
+
+    if (!docSetting.exists()) {    // Tài liệu không tồn tại
+        return null;
+    } else {
+        return docSetting.data();
+    }
+})
+
 const reducer = createSlice({
     name: 'notice',
     initialState,
@@ -114,6 +134,19 @@ const reducer = createSlice({
         });
         builder.addCase(deleteNotice.rejected, (state) => {
             state.loading = false;
+        });
+
+        builder.addCase(getGeneralAnnouncement.fulfilled, (state, action) => {            
+            if(action.payload){
+                state.GeneralAnnouncement = {
+                    banner: action.payload.banner,
+                    content: action.payload.content,
+                    email: action.payload.email,
+                    note: action.payload.note,
+                    status: action.payload.status,
+                    title: action.payload.title,
+                }
+            }
         });
     },
 });
