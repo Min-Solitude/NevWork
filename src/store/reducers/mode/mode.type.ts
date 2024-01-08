@@ -15,6 +15,7 @@ export type ModeState = {
     fileTray: FileTray | null;
     isShowFile: boolean;
     header: Header | null;
+    navigation: Navigation | null;
     background: Background | null;
 };
 
@@ -56,4 +57,11 @@ export type Background = {
     name: string;
     status: boolean;
     type: string;
+}
+
+export type Navigation = {
+    clock: boolean;
+    layout: boolean;
+    status: boolean;
+    image: string;
 }

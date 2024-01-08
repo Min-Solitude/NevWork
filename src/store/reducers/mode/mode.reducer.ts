@@ -47,6 +47,7 @@ const initialState: ModeState = {
     isShowFile: false,
     header: null,
     background: null,
+    navigation: null,
 };
 
 export const setThemeVideo = createAsyncThunk('mode/setThemeVideo', async (theme: string) => {
@@ -122,6 +123,19 @@ export const getBackground = createAsyncThunk('mode/getBackground', async () => 
      } catch (error) {
             console.log('error', error);
      }
+});
+
+export const getNavigation = createAsyncThunk('mode/getNavigation', async () => {
+    const noticeRef = collection(db, 'setting');
+
+    const docSetting = await getDoc(doc(noticeRef, 'TaskBar'));
+
+    if (!docSetting.exists()) {
+        // Tài liệu không tồn tại
+        return null;
+    } else {
+        return docSetting.data();
+    }
 });
 
 const reducer = createSlice({
@@ -240,9 +254,21 @@ const reducer = createSlice({
                 };
             }
         });
+
         builder.addCase(getBackground.fulfilled, (state, action) => {
             if (action.payload) {
                 state.background = action.payload; 
+            }
+        });
+
+        builder.addCase(getNavigation.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.navigation = {
+                    status: action.payload.status,
+                    layout: action.payload.layout,
+                    clock: action.payload.clock,
+                    image: action.payload.image,
+                }
             }
         });
     },

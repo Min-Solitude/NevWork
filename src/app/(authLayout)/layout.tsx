@@ -1,6 +1,8 @@
+import Button from '@/components/customs/Button';
 import Logo from '@/components/customs/Logo';
 import View from '@/motions/View';
 import dynamic from 'next/dynamic';
+import LogoAuth from './components/Logo';
 
 const BackgroundTheme = dynamic(() => import('@/components/shared/BackgroundTheme'), { ssr: false });
 
@@ -12,7 +14,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
                 className={`absolute z-20 top-0 left-1/2 -translate-x-1/2 flex m-auto duration-150 w-full min-h-screen `}
             >
                 <div className="flex-1 relative hidden lg:block">
-                    {/* <Logo kind="large" className="absolute top-0 left-4" /> */}
+                    <LogoAuth className="top-4 left-4 absolute" />
                 </div>
                 <View
                     className="flex-1 px-4 lg:px-0 duration-150 bg-bg-black-90 border-l flex justify-center items-center flex-col border-cl-btn-dark-bd-primary dark:text-white text-white shadow-sd-primary"
