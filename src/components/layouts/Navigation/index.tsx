@@ -25,14 +25,26 @@ export default function Navigation({ className }: NavigationProps) {
         dispatch(getNavigation());
     }, []);
 
+    if (!navigation?.status) return null;
+
     return (
-        <div className={`absolute z-30 bottom-0 md:py-4 left-0 flex flex-col gap-4 w-full ${className}`}>
-            <div className="md:w-[90%] w-full flex justify-between items-center m-auto px-4 md:px-0">
+        <div
+            className={`absolute z-30 bottom-0  left-0 flex flex-col gap-4 w-full ${
+                !navigation ? 'md:py-0' : 'md:py-4'
+            } ${className}`}
+        >
+            <div
+                className={`w-full flex justify-between items-center m-auto px-4  ${
+                    !navigation?.layout ? 'md:w-full ' : 'md:w-[90%] md:px-0'
+                }`}
+            >
                 {navigation && <Time data={navigation} />}
                 <CDMusic />
             </div>
             <div
-                className={`m-auto bg-bg-black-90 text-white relative duration-300 shadow-sd-primary text-base md:rounded-lg w-full flex  items-center md:w-[90%] p-2 justify-between`}
+                className={`m-auto bg-bg-black-90 text-white relative duration-300 shadow-sd-primary text-base  w-full flex  items-center p-2 justify-between ${
+                    !navigation?.layout ? 'md:w-full md:rounded-t-3xl' : 'md:w-[90%] md:rounded-lg'
+                }`}
             >
                 <View
                     className="flex gap-2 items-center justify-between w-full"

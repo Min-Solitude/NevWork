@@ -44,6 +44,9 @@ import skyvideonight from './imgs/vip/skyvideonight.png';
 // ITEM
 
 import ring from './imgs/item/ring.png';
+import altar from './imgs/altar.png';
+import tom from './imgs/tom.jpg';
+import tom2 from './imgs/tom2.webp';
 
 export const IMAGES = {
     sofi,
@@ -75,4 +78,7 @@ export const IMAGES = {
     skyvideoday,
     skyvideonight,
     ring,
+    altar,
+    tom,
+    tom2,
 };

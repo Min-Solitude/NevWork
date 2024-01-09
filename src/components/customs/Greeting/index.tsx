@@ -30,8 +30,6 @@ export default function Greeting() {
 
     if (!isShowGreeting || !greeting?.status) return null;
 
-    console.log(greeting);
-
     return (
         <View
             className="fixed z-40 bottom-[16rem] cursor-pointer left-[8rem] max-w-[30rem]"
