@@ -3,6 +3,7 @@
 import { IMAGES } from '@/assets';
 import Button from '@/components/customs/Button';
 import Toast from '@/components/customs/Toast';
+import Payment from '@/components/shared/Payment';
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
 import View from '@/motions/View';
 import { hanldeSendAltar } from '@/store/reducers/altar/altar.reducer';
@@ -17,6 +18,8 @@ export default function AltarPage() {
     const [isLoad, setIsLoad] = React.useState(false);
     const [isValue, setIsValue] = React.useState('');
     const [isChooseAltar, setIsChooseAltar] = React.useState(1);
+
+    const [isVip, setIsVip] = React.useState(false);
 
     const account = useAppSelector((state) => state.auth.account);
 
@@ -60,7 +63,8 @@ export default function AltarPage() {
     console.log(account);
 
     return (
-        <section className="flex justify-center items-center bg-white relative h-screen text-black">
+        <section className="flex justify-center items-center bg-white relative h-screen ">
+            {isVip && <Payment close={() => setIsVip(false)} />}
             <Link className="absolute top-4 left-4" href={'/'}>
                 <Button className="  px-5 text-gray-800" kind="form">
                     <IonIcon name="arrow-back" className="text-xl" />
@@ -122,29 +126,51 @@ export default function AltarPage() {
                                     <Image src={IMAGES.bantho2} width={1980} height={1440} alt="" className="w-full" />
                                 </View>
                                 <View
-                                    className={`w-[3rem] h-[3rem] rounded-xl bg-gradient-to-r from-[#0093E9] to-[#80D0C7] cursor-pointer border-red-500 shadow-sd-primary  ${
-                                        isChooseAltar === 3 ? 'border-2' : 'border-0'
-                                    }`}
+                                    className={`w-[3rem] h-[3rem] rounded-xl bg-gradient-to-r from-[#0093E9] to-[#80D0C7] cursor-pointer border-red-500 shadow-sd-primary ${
+                                        !account?.vip?.isVip && 'brightness-50'
+                                    } ${isChooseAltar === 3 ? 'border-2' : 'border-0'}`}
                                     whileTap={{ scale: 0.9 }}
-                                    onClick={() => setIsChooseAltar(3)}
+                                    onClick={() => {
+                                        if (account?.vip?.isVip) {
+                                            setIsChooseAltar(3);
+                                        } else {
+                                            setIsVip(true);
+                                        }
+                                    }}
                                 >
                                     <Image src={IMAGES.bantho3} width={1980} height={1440} alt="" className="w-full" />
                                 </View>
                                 <View
-                                    className={`w-[3rem] h-[3rem] rounded-xl bg-gradient-to-r from-[#8BC6EC] to-[#9599E2] cursor-pointer border-red-500 shadow-sd-primary ${
+                                    className={`w-[3rem] ${
+                                        !account?.vip?.isVip && 'brightness-50'
+                                    } h-[3rem] rounded-xl bg-gradient-to-r from-[#8BC6EC] to-[#9599E2] cursor-pointer border-red-500 shadow-sd-primary ${
                                         isChooseAltar === 4 ? 'border-2' : 'border-0'
                                     }`}
                                     whileTap={{ scale: 0.9 }}
-                                    onClick={() => setIsChooseAltar(4)}
+                                    onClick={() => {
+                                        if (account?.vip?.isVip) {
+                                            setIsChooseAltar(4);
+                                        } else {
+                                            setIsVip(true);
+                                        }
+                                    }}
                                 >
                                     <Image src={IMAGES.bantho4} width={1980} height={1440} alt="" className="w-full" />
                                 </View>
                                 <View
-                                    className={`w-[3rem] h-[3rem] rounded-xl bg-gradient-to-r from-[#00DBDE] to-[#FC00FF] border-red-500 cursor-pointer shadow-sd-primary ${
+                                    className={`w-[3rem] ${
+                                        !account?.vip?.isVip && 'brightness-50'
+                                    } h-[3rem] rounded-xl bg-gradient-to-r from-[#00DBDE] to-[#FC00FF] border-red-500 cursor-pointer shadow-sd-primary ${
                                         isChooseAltar === 5 ? 'border-2' : 'border-0'
                                     }`}
                                     whileTap={{ scale: 0.9 }}
-                                    onClick={() => setIsChooseAltar(5)}
+                                    onClick={() => {
+                                        if (account?.vip?.isVip) {
+                                            setIsChooseAltar(5);
+                                        } else {
+                                            setIsVip(true);
+                                        }
+                                    }}
                                 >
                                     <Image src={IMAGES.bantho5} width={1980} height={1440} alt="" className="w-full" />
                                 </View>
