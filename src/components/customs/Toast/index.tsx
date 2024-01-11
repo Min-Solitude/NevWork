@@ -6,12 +6,12 @@ export default function Toast({ type, message }: { type: ToastType; message: str
     return (
         <div className="bg-transparent">
             {type === 'success' && (
-                <div className="flex gap-2 b text-white font-semibold items-center justify-center">
+                <div className="flex gap-2 b bg-white text-black  font-semibold items-center justify-center">
                     <p>{message}</p> <p className="text-lg">&#128526;</p>
                 </div>
             )}
             {type === 'error' && (
-                <div className="flex gap-2 b text-white font-semibold items-center justify-center">
+                <div className="flex gap-2 b bg-white text-gray-700 font-semibold items-center justify-center">
                     <p>{message}</p> <p className="text-lg">&#128546;</p>
                 </div>
             )}

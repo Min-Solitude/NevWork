@@ -1,35 +1,33 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react';
 
 export default function CheckScreen() {
-
-    const [isMobile, setIsMobile] = useState(false)
+    const [isMobile, setIsMobile] = useState(false);
 
     const handleCheckScreen = () => {
         if (window.innerWidth <= 768) {
-            setIsMobile(true)
+            setIsMobile(true);
         } else {
-            setIsMobile(false)
+            setIsMobile(false);
         }
-    }
+    };
 
     useEffect(() => {
-        handleCheckScreen()
-        window.addEventListener('resize', handleCheckScreen)
-        return () => window.removeEventListener('resize', handleCheckScreen)
-    }, [])
+        handleCheckScreen();
+        window.addEventListener('resize', handleCheckScreen);
+        return () => window.removeEventListener('resize', handleCheckScreen);
+    }, []);
 
     if (isMobile) {
         return (
-            <div className='fixed top-0 left-0 bottom-0 right-0 z-50 flex justify-center items-center bg-black'>
-                <div className='bg-white rounded-lg p-6 text-center'>
-                    <h1 className='font-dancing text-2xl text-black'>Ứng dụng đang được phát triển</h1>
-                    <p className='text-black mt-4'>Vui lòng sử dụng trên máy tính để có trải nghiệm tốt nhất</p>
-                </div>
+            <div className="fixed top-0 left-0 bottom-0 right-0 z-50 flex justify-center items-center bg-black">
+                <h1 className="bg-gradient-to-r font-bold font-sans uppercase text-4xl text-center from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
+                    Vui lòng sử dụng Website
+                </h1>
             </div>
-        )
+        );
     }
 
-    return null
+    return null;
 }

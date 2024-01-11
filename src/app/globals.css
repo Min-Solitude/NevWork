@@ -56,7 +56,7 @@ body {
 
 .Toastify__toast {
     border-radius: 16px; 
-    @apply shadow-sd-primary top-8 bg-[#ffffff46] border border-[#424242] !important;
+    @apply shadow-sd-primary top-8 bg-[#ffffff] border border-[#d4d4d4] !important;
 }
 
 /* range  */

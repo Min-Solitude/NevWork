@@ -47,6 +47,11 @@ import ring from './imgs/item/ring.png';
 import altar from './imgs/altar.png';
 import tom from './imgs/tom.jpg';
 import tom2 from './imgs/tom2.webp';
+import bantho1 from './imgs/bantho1.png';
+import bantho2 from './imgs/bantho2.png';
+import bantho3 from './imgs/bantho3.png';
+import bantho4 from './imgs/bantho4.png';
+import bantho5 from './imgs/bantho5.png';
 
 export const IMAGES = {
     sofi,
@@ -81,4 +86,9 @@ export const IMAGES = {
     altar,
     tom,
     tom2,
+    bantho1,
+    bantho2,
+    bantho3,
+    bantho4,
+    bantho5,
 };
