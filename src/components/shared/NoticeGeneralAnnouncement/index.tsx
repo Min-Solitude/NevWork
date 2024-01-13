@@ -51,7 +51,7 @@ export default function NoticeGeneralAnnouncement() {
         <div className="fixed top-0 left-0 bottom-0 right-0 z-40 bg-[#000000bb] flex justify-center items-center">
             {loading && <Loading />}
             <View
-                className="flex-1 overflow-hidden max-w-[30rem] bg-black text-white rounded-xl shadow-sd-primary"
+                className="flex-1 overflow-hidden max-w-[30rem] min-h-[30rem] bg-black text-white rounded-xl shadow-sd-primary"
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.5 }}
@@ -69,30 +69,32 @@ export default function NoticeGeneralAnnouncement() {
                         <Close className="w-6 h-6 cursor-pointer" onClick={handleCloseNotice} />
                     </div>
                 </div>
-                <div className="px-8 flex flex-col gap-4 py-4 font-sans">
-                    <h1 className="font-bold mt-4 text-2xl ">{generalAnnouncement?.title}</h1>
-                    <p className="font-medium text-sm">{generalAnnouncement?.content}</p>
-                    {generalAnnouncement?.email && (
-                        <form
-                            className="w-full flex items-center justify-between bg-[#222222] p-2 my-4 text-sm font-medium rounded-xl"
-                            onSubmit={handleRegisterMember}
-                        >
-                            <input
-                                type="email"
-                                className="flex-1 pl-2 text-[16px] text-cl-yellow bg-transparent outline-none"
-                                value={isEmail}
-                                onChange={(e) => setIsEmail(e.target.value)}
-                                placeholder="Nhập email của bạn"
-                                required
-                            />
-                            <Button
-                                className="py-2 duration-150 hover:bg-cl-yellow-dark hover:text-white px-5 rounded-lg border-2 border-cl-yellow-dark"
-                                type="submit"
+                <div className="px-8 flex min-h-[20rem] flex-col justify-between gap-4 py-4 font-sans">
+                    <div className="w-full flex flex-col gap-4">
+                        <h1 className="font-bold mt-4 text-2xl ">{generalAnnouncement?.title}</h1>
+                        <p className="font-medium text-sm">{generalAnnouncement?.content}</p>
+                        {generalAnnouncement?.email && (
+                            <form
+                                className="w-full flex items-center justify-between bg-[#222222] p-2 my-4 text-sm font-medium rounded-xl"
+                                onSubmit={handleRegisterMember}
                             >
-                                <span className="font-medium">Đăng ký</span>
-                            </Button>
-                        </form>
-                    )}
+                                <input
+                                    type="email"
+                                    className="flex-1 pl-2 text-[16px] text-cl-yellow bg-transparent outline-none"
+                                    value={isEmail}
+                                    onChange={(e) => setIsEmail(e.target.value)}
+                                    placeholder="Nhập email của bạn"
+                                    required
+                                />
+                                <Button
+                                    className="py-2 duration-150 hover:bg-cl-yellow-dark hover:text-white px-5 rounded-lg border-2 border-cl-yellow-dark"
+                                    type="submit"
+                                >
+                                    <span className="font-medium">Đăng ký</span>
+                                </Button>
+                            </form>
+                        )}
+                    </div>
                     <div className="w-full text-center mb-2">
                         <p className="text-sm font-medium">{generalAnnouncement?.note} 🚀</p>
                     </div>

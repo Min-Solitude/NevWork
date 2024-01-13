@@ -14,7 +14,7 @@ export default function Image() {
         <div>
             <Button
                 kind="square"
-                className={` hover:bg-cl-yellow-dark text-white hover:text-cl-yellow dark:hover:border-cl-yellow border border-transparent dark:hover:bg-transparent bg-transparent`}
+                className={` hover:bg-cl-yellow-dark text-white dark:hover:text-cl-yellow dark:hover:border-cl-yellow border border-transparent dark:hover:bg-transparent bg-transparent`}
                 onClick={() => {
                     dispatch(ModeAction.setShowPopupManagerImage(!isShowPopupMusic));
                 }}

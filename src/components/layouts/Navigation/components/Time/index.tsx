@@ -31,7 +31,7 @@ export default function Time({ data }: TimeProps) {
 
     if (data?.clock) {
         return (
-            <div className="w-[12rem] h-[6rem] relative rounded-xl overflow-hidden border-2 border-cl-yellow-dark shadow-sd-primary">
+            <div className="w-[14rem] h-[8rem] relative rounded-xl overflow-hidden border-2 border-cl-yellow-dark shadow-sd-primary">
                 <Image src={data?.image} width={1980} height={1440} alt="" className="w-full h-full object-cover" />
                 <span className="text-sm py-1 px-2 rounded-lg absolute bottom-2 left-1/2 -translate-x-1/2 bg-cl-yellow-dark font-bold font-sans ">
                     {time.toLocaleTimeString()}
