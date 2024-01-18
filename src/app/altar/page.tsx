@@ -18,7 +18,7 @@ export default function AltarPage() {
     const [isValue, setIsValue] = React.useState('');
     const [isChooseAltar, setIsChooseAltar] = React.useState(1);
 
-    const [isVip, setIsVip] = React.useState(false);
+    const [isAltarSuccess, setIsAltarSuccess] = React.useState<null | string>('success');
 
     const account = useAppSelector((state) => state.auth.account);
 
@@ -38,7 +38,7 @@ export default function AltarPage() {
             const random = Math.random() * 100;
             if (random > 50) {
                 setIsLoad(false);
-                toast.success(<Toast message="Cầu nguyện thành công" type="success" />);
+                setIsAltarSuccess('success');
                 const payload = {
                     content: isValue,
                     uid: account?.uid,
@@ -48,7 +48,7 @@ export default function AltarPage() {
                 }
             } else {
                 setIsLoad(false);
-                toast.error(<Toast message="Cầu nguyện thất bại" type="error" />);
+                setIsAltarSuccess('error');
             }
         }, 5000);
     };
@@ -61,14 +61,47 @@ export default function AltarPage() {
 
     return (
         <section className="flex justify-center items-center bg-white relative h-screen ">
+            {isAltarSuccess && (
+                <div className="fixed top-0 left-0 bottom-0 right-0 bg-bg-black-90 flex justify-center items-center z-40">
+                    <View
+                        className="bg-white shadow-sd-primary px-4 py-8 rounded-xl text-black w-full max-w-[30rem] flex flex-col items-center"
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <h1 className={`text-2xl font-bold font-sans text-cl-yellow-dark`}>
+                            {isAltarSuccess === 'success' ? 'Cầu nguyện thành công' : 'Cầu nguyện thất bại'}
+                        </h1>
+                        <Image
+                            src={
+                                isAltarSuccess === 'success'
+                                    ? 'https://i.pinimg.com/originals/78/c8/c2/78c8c26e59d31f298303082074dfef59.gif'
+                                    : 'https://i.pinimg.com/originals/69/1b/3b/691b3b9545c56c040e7c77ae61c040f7.gif'
+                            }
+                            width={1980}
+                            height={1440}
+                            alt=""
+                            className="w-[12rem]"
+                        />
+                        <Button
+                            className="font-sans py-2 px-8 mt-4 rounded-lg bg-cl-yellow-dark text-black font-medium"
+                            onClick={() => setIsAltarSuccess(null)}
+                        >
+                            Đóng
+                        </Button>
+                    </View>
+                </div>
+            )}
             <Image
-                src={'https://i.pinimg.com/originals/b0/28/1d/b0281ddf324fe28d238e174059fd2b5c.gif'}
+                src={
+                    isLoad
+                        ? 'https://i.pinimg.com/originals/b0/28/1d/b0281ddf324fe28d238e174059fd2b5c.gif'
+                        : 'https://i.pinimg.com/originals/f5/04/0c/f5040c8d8f022cf4c957a1cd7c94f30a.jpg'
+                }
                 width={1980}
                 height={1440}
                 alt=""
-                className={`absolute -z-0 top-0 left-0 w-full h-full object-cover ${
-                    isLoad ? 'opacity-100' : 'opacity-0'
-                }`}
+                className={`absolute -z-0 top-0 left-0 w-full h-full object-cover `}
             />
             {!isLoad && (
                 <Link className="absolute top-4 left-4" href={'/'}>
@@ -120,11 +153,11 @@ export default function AltarPage() {
             {!isLoad && (
                 <div className="w-[90%] min-h-[90%] xl:w-[80%] 2xl:w-[50%] duration-150 z-10">
                     <div className="flex flex-col gap-8">
-                        <h1 className="bg-gradient-to-r font-sans text-2xl font-bold from-cl-yellow-dark to-cl-yellow inline-block text-transparent bg-clip-text">
-                            Ước nguyện
+                        <h1 className="bg-gradient-to-r font-sans text-center text-2xl font-bold  inline-block text-white">
+                            Ước nguyện <IonIcon name="sparkles" className="text-xl ml-2" />
                         </h1>
                         <div className="flex gap-8">
-                            <div className="flex-1 max-w-[13rem] bg-white">
+                            <div className="flex-1 max-w-[13rem] backdrop-blur-[2rem] border text-white border-white shadow-sd-primary p-2 rounded-xl">
                                 <View
                                     className="rounded-xl shadow-sd-primary border border-gray-100 overflow-hidden p-1 bg-gradient-to-r from-cl-yellow-dark to-cl-yellow h-[12rem]"
                                     initial={{ opacity: 0, x: -20 }}
@@ -140,7 +173,7 @@ export default function AltarPage() {
                                     />
                                 </View>
                                 <View
-                                    className="mt-2 text-sm flex flex-col gap-1 text-gray-600"
+                                    className="mt-2 text-sm flex flex-col gap-1 "
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ duration: 0.5, delay: 0.2 }}
@@ -154,11 +187,11 @@ export default function AltarPage() {
                                 </View>
                             </div>
                             <div
-                                className={`flex-1 ${
-                                    !isLoad ? 'border-l border-gray-200 bg-white' : 'bg-transparent '
-                                } pl-8`}
+                                className={`flex-1 py-2 p-2 rounded-xl ${
+                                    !isLoad ? 'border border-white backdrop-blur-[2rem]' : 'bg-transparent '
+                                }`}
                             >
-                                <View className="flex gap-4">
+                                <View className="flex gap-2">
                                     <View
                                         className={`w-[3rem] h-[3rem] rounded-xl bg-gradient-to-r from-cl-yellow-dark to-cl-yellow shadow-sd-primary flex justify-center border-red-500 cursor-pointer items-center p-1 ${
                                             isChooseAltar === 1 ? 'border-2' : 'border-0'
@@ -241,7 +274,7 @@ export default function AltarPage() {
                                         />
                                     </View>
                                 </View>
-                                <div className="flex flex-col items-center w-full mt-8">
+                                <div className="flex flex-col items-center w-full mb-8">
                                     <View
                                         className={`w-full flex justify-center items-center relative`}
                                         initial={{ opacity: 0, y: 100, scale: 0.5 }}
