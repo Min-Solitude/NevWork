@@ -18,7 +18,7 @@ export default function AltarPage() {
     const [isValue, setIsValue] = React.useState('');
     const [isChooseAltar, setIsChooseAltar] = React.useState(1);
 
-    const [isAltarSuccess, setIsAltarSuccess] = React.useState<null | string>('success');
+    const [isAltarSuccess, setIsAltarSuccess] = React.useState<null | string>(null);
 
     const account = useAppSelector((state) => state.auth.account);
 
@@ -157,9 +157,9 @@ export default function AltarPage() {
                             Ước nguyện <IonIcon name="sparkles" className="text-xl ml-2" />
                         </h1>
                         <div className="flex gap-8">
-                            <div className="flex-1 max-w-[13rem] backdrop-blur-[2rem] border text-white border-white shadow-sd-primary p-2 rounded-xl">
+                            <div className="flex-1 max-w-[13rem] backdrop-blur-[2rem] border text-white border-[#ffffff41] shadow-sd-primary p-2 rounded-xl">
                                 <View
-                                    className="rounded-xl shadow-sd-primary border border-gray-100 overflow-hidden p-1 bg-gradient-to-r from-cl-yellow-dark to-cl-yellow h-[12rem]"
+                                    className="rounded-xl shadow-sd-primary border border-[#ffffff41]  overflow-hidden p-1 bg-gradient-to-r from-cl-yellow-dark to-cl-yellow h-[12rem]"
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ duration: 0.5 }}
@@ -188,7 +188,7 @@ export default function AltarPage() {
                             </div>
                             <div
                                 className={`flex-1 py-2 p-2 rounded-xl ${
-                                    !isLoad ? 'border border-white backdrop-blur-[2rem]' : 'bg-transparent '
+                                    !isLoad ? 'border border-[#ffffff41]  backdrop-blur-[2rem]' : 'bg-transparent '
                                 }`}
                             >
                                 <View className="flex gap-2">
